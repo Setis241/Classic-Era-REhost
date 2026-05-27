@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экономика и Торговля | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+<div class="wrapper">
+        <aside class="sidebar">
+            <h3>Финансы</h3>
+            <ul>
+                <li><a href="mechanics.html">← К механикам</a></li>
+                <li><a href="#assets">Глобальные активы</a></li>
+                <li><a href="#industry">Промышленность</a></li>
+                <li><a href="#trade">Торговля</a></li>
+                <li><a href="#loans">Кредиты и МГА</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            
+            <section id="assets" style="margin-bottom: 50px;">
+                <h1 class="gold-title" style="text-align: center;">ЭКОНОМИЧЕСКИЙ РЕЗЕРВ</h1>
+                
+                <div class="economy-header">
+                    <p>Основные ресурсы и валюты, обеспечивающие функционирование государств.</p>
+                </div>
+
+                <div class="build-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="build-card" style="border-color: var(--gold-accent);">
+                        <div class="build-name" style="color: var(--gold-accent);">ГС</div>
+                        <span class="build-tag"><b>Галактический Стандарт.</b> Основная валюта. Используется для строительства, колонизации (400 ГС) и терраформирования (1000 ГС).</span>
+                    </div>
+                    <div class="build-card" style="border-color: #a855f7;">
+                        <div class="build-name" style="color: #a855f7;">ОН</div>
+                        <span class="build-tag"><b>Очки Науки.</b> Ресурс для открытия технологий. Генерируется Научными Институтами. Позволяет продвигаться по древу исследований.</span>
+                    </div>
+                    <div class="build-card" style="border-color: #4ade80;">
+                        <div class="build-name" style="color: #4ade80;">ТНП</div>
+                        <span class="build-tag"><b>Товары Народного Потребления.</b> Производятся на фабриках. Необходимы для обеспечения торговых путей. 1 ТНП = 2 ГС при сбыте.</span>
+                    </div>
+                </div>
+
+                <div class="trade-route-box">
+                    <strong>ОБЩИЕ ПРАВИЛА:</strong>
+                    <ul>
+                        <li>Доходы начисляются в начале каждого игрового хода.</li>
+                        <li>Пассивного дохода от планет нет — только от возведенных и модернизированных структур.</li>
+                        <li>Передача ресурсов между игроками осуществляется свободно через дипломатические посты.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="industry">
+                <div class="section-divider">ПЛАНЕТАРНАЯ ПРОМЫШЛЕННОСТЬ</div>
+                <p class="desc-text" style="text-align: center;">Каждое здание занимает 1 ячейку планеты. Внутренняя мощность здания регулируется шестью производственными слотами.</p>
+                
+                <div class="build-grid">
+                    <div class="build-card">
+                        <div class="build-header">
+                            <span class="build-name">Гражданская фабрика</span>
+                            <span class="build-price">500 ГС</span>
+                        </div>
+                        <span class="build-tag"><b>Доход:</b> +100 ГС за каждый открытый слот (автоматически). <br><b>Опция:</b> производство 100 ед. ТНП за слот.</span>
+                        <div class="slot-container">
+                            <div class="slot-box slot-free">0</div><div class="slot-box slot-free">0</div><div class="slot-box">500</div>
+                            <div class="slot-box">1.5к</div><div class="slot-box">1.5к</div><div class="slot-box">3к</div>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <div class="build-header">
+                            <span class="build-name">Добывающий завод</span>
+                            <span class="build-price">500 ГС</span>
+                        </div>
+                        <span class="build-tag"><b>Доход:</b> +100 ГС за каждый открытый слот (автоматически). Добыча руд и минералов.</span>
+                        <div class="slot-container">
+                            <div class="slot-box slot-free">0</div><div class="slot-box slot-free">0</div><div class="slot-box">500</div>
+                            <div class="slot-box">1.5к</div><div class="slot-box">1.5к</div><div class="slot-box">3к</div>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <div class="build-header">
+                            <span class="build-name">Торговый хаб</span>
+                            <span class="build-price">1000 ГС</span>
+                        </div>
+                        <span class="build-tag"><b>Доход:</b> +100 ГС за каждый открытый слот. <br><b>Лимит:</b> 1 слот обслуживает ровно 1 торговый путь.</span>
+                        <div class="slot-container">
+                            <div class="slot-box slot-free">0</div><div class="slot-box">500</div><div class="slot-box">500</div>
+                            <div class="slot-box">1.5к</div><div class="slot-box">1.5к</div><div class="slot-box">3к</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>ВНИМАНИЕ:</strong> Оборонные структуры (Верфи, Заводы, Центры подготовки) и Научные институты <u>не приносят</u> доход в ГС. Их задача — обеспечение мощи и прогресса.
+                </div>
+            </section>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 50px 0;">
+
+            <section id="trade">
+                <div class="economy-header" style="border-left-color: var(--neon-blue);">
+                    <h1 class="gold-title" style="border:none; margin:0; color: var(--neon-blue);">МЕЖГАЛАКТИЧЕСКАЯ ТОРГОВЛЯ</h1>
+                </div>
+
+                <div class="desc-text">
+                    <p>Торговые отношения устанавливаются между двумя игроками (фракциями) и приносят доход обеим сторонам на основе грузоперевозок ТНП.</p>
+                    
+                    <h3>Формула прибыли:</h3>
+                    
+                    <div class="calc-formula">Прибыль = (Кол-во ТНП на пути) × 2 ГС</div>
+                    <p><i>Пример: Конвой из 10 кораблей по 100 ТНП каждый приносит 2000 ГС за ход.</i></p>
+
+                    <div class="trade-route-box">
+                        <h4>Безопасность путей:</h4>
+                        <ul>
+                            <li><strong>Атаки:</strong> Доход может быть заморожен пиратами или вражеским флотом.</li>
+                            <li><strong>Пиратство:</strong> Раз в ход существует шанс случайного нападения (ивент).</li>
+                            <li><strong>Конвой:</strong> Назначение эскорта минимизирует риски.</li>
+                        </ul>
+                    </div>
+
+                    <div class="trade-route-box" id="loans" style="border-style: solid;">
+                        <h4 style="color: var(--gold-accent);">Кредиты и Арбитраж:</h4>
+                        <p><strong>Займы:</strong> Игроки могут выдавать ГС в долг по контракту. Невыплаты решаются самостоятельно или через подачу заявления в <b>Межгалактическую Ассамблею (МГА)</b>.</p>
+                        <p><strong>МГА:</strong> Высшее объединение государств, выносящее вердикты по финансовым и территориальным спорам.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

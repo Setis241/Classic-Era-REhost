@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пантеон | Классическая Эра</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Архивы памяти</h3>
+            <ul>
+                <li><a href="index.html">← на Главную</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1 class="gold-title" style="text-align: center; font-size: 28px; letter-spacing: 4px;">ПАНТЕОН ВЕТЕРАНОВ</h1>
+            <p style="text-align: center; color: #8892b0; margin-bottom: 40px;">Память о тех, кто ковал историю в пустоте космоса.</p>
+
+            <h2 id="creators" class="pantheon-category">Создатели Классической Эры</h2>
+            <div class="grid-2-cols">
+                
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/stanya.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Станя Победоносец</h3>
+                    <div class="v-dates">Эпоха участия: с 2016 года по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">
+                        <p>Один из первопроходцев, заложивший фундамент «Классической Эры». Является ветераном проектов «Новая Эра», «Тени Новой Эры», «Ренессанс». Сооснаватель «Теней Новой Эры».</p>
+                        <p>Занимает должность Владельца и Главного Администратора</p>
+                    </div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/vishenka.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Вишенка на Торте</h3>
+                    <div class="v-dates">Эпоха участия: 2017 и 2025 годы</div>
+                    <div class="v-desc-hidden" style="display: none;">
+                        <p>Руководитель игрового отдела. Принимала участие в 2017 году как игрок в проекте Новая Эра, основала с нуля работу игровых механик в Классической Эре.</p>
+                        <p>Вышла на заслуженную пенсию.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 id="veterans" class="pantheon-category">Ветераны «Новой Эры», «Теней Новой Эры» и «Ренессанса»</h2>
+            <div class="grid-3-cols">
+                
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/danilov.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Илья Данилов</h3>
+                    <div class="v-dates">Эпоха участия: с 2013 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель «Новой Эры», «Зова Новой Эры» и «Тени Новой Эры». Провёл игроков через тернии к звёздам.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/augruss.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Георгий Лебедь</h3>
+                    <div class="v-dates">Эпоха участия: с 2015 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель проектов «Новая Эра 3359» и «Миллион Огней», является ветераном «Новой Эры». Автор мемов и культа Бочкарёва.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/setias.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Андрей Литвинов</h3>
+                    <div class="v-dates">Эпоха участия: с 2015 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель проектов «Миллион Огней», «Старая Эра» и «Ренессанс». Войнтопия не пала.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/pechkin.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Владислав Федоров</h3>
+                    <div class="v-dates">Эпоха: с 2015 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель проекта «Миллион Огней», так же ветеран «Новой Эры». Автор мемов и культа Бочкарёва.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/ungern.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Максимилиан Унгерн</h3>
+                    <div class="v-dates">Эпоха: с 2015 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель проектов «Новая Эра 3355», «Новая Эра 3356» и «Новая Эра 3357», так же ветеран «Новой Эры»</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/sloboda.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Артур Слободянюк</h3>
+                    <div class="v-dates">Эпоха: с 2015 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Основатель проекта «Новая Эра 3354», так же ветеран «Новой Эры». Автор мемов и лучший серый котёнок.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/aleksas.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Алексас Витаутас</h3>
+                    <div class="v-dates">Эпоха: Неизвестно</div>
+                    <div class="v-desc-hidden" style="display: none;">Ветеран проекта «Новая Эра» и «Ренессанс». Привёл Сёгунат к победе.</div>
+                </div>
+                
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/sint.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Синт Синя</h3>
+                    <div class="v-dates">Эпоха: Неизвестно</div>
+                    <div class="v-desc-hidden" style="display: none;">Ветеран проекта «Новая Эра» и «Ренессанс». Публицист красивых артов.</div>
+                </div>
+
+                <div class="v-card" onclick="openModal(this)">
+                    <img src="img/avatar-placeholder.jpg" alt="Аватар" class="v-avatar">
+                    <h3 class="v-name">Егор Фадеев</h3>
+                    <div class="v-dates">Эпоха: с 2018 по н.в.</div>
+                    <div class="v-desc-hidden" style="display: none;">Ветеран проекта «Новая Эра» и «Ренессанс». Тёмное зло пробуждается.</div>
+                </div>
+
+            </div>
+
+            <div class="thanks-block">
+                <h3 style="color: var(--gold-accent); margin-top: 0;">Безымянным героям</h3>
+                <p>Мы выражаем глубочайшую благодарность всем игрокам, командирам и простым пилотам, чьи имена не вошли в этот реестр. Ваши действия, союзы и предательства формировали эту галактику. Вы — истинная суть «Новой Эры».</p>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="pantheon-modal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <img id="m-img" src="" alt="Аватар" class="v-avatar" style="width: 150px; height: 150px;">
+            <h2 id="m-name" class="gold-title" style="border: none; margin-bottom: 5px;">Имя</h2>
+            <div id="m-dates" class="v-dates" style="margin-bottom: 15px;">Даты</div>
+            <div id="m-desc">Здесь появится подробная история.</div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('pantheon-modal');
+
+        // Функция открывает окно и подставляет данные из карточки, на которую кликнули
+        function openModal(card) {
+            document.getElementById('m-img').src = card.querySelector('.v-avatar').src;
+            document.getElementById('m-name').innerText = card.querySelector('.v-name').innerText;
+            document.getElementById('m-dates').innerText = card.querySelector('.v-dates').innerText;
+            // Берем спрятанный HTML-текст и вставляем его в окно
+            document.getElementById('m-desc').innerHTML = card.querySelector('.v-desc-hidden').innerHTML;
+            
+            // Показываем окно (меняем display: none на flex)
+            modal.style.display = 'flex';
+        }
+
+        // Функция закрывает окно
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Закрытие окна при клике на пустой темный фон вокруг карточки
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

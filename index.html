@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архивы | Классическая Эра</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hero-section {
+            /* Затемнение и сама картинка */
+            background: 
+                linear-gradient(rgba(5, 8, 16, 0.6), rgba(5, 8, 16, 0.9)), 
+                url('img/background_index.png'); 
+            
+            background-size: cover;
+            background-position: center;
+            
+            /* Делаем из этого красивый баннер */
+            border-radius: 12px;
+            padding: 60px 40px;
+            border: 1px solid rgba(0, 229, 255, 0.15); /* Легкая неоновая рамка */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Тень для объема */
+            
+            /* Центрируем всё внутри (если вдруг съедет) */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Центрируем сам терминал внутри баннера */
+        .terminal-text {
+            max-width: 600px;
+            width: 100%;
+            text-align: left; /* Текст внутри терминала оставляем по левому краю */
+        }
+    </style>
+</head>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Быстрые ссылки</h3>
+            <ul>
+                <li><a href="lore.html">История Мира</a></li>
+                <li><a href="#">Сводка об Государствах</a></li>
+                <li><a href="map.html">Карта Галактики</a></li>
+                <li><a href="exchange.html">Региональная Биржа</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            
+            <section class="hero-section">
+                <h1 class="hero-title">Архивы Классической Эры</h1>
+                
+                <div class="terminal-text">
+                    > Установка соединения с центральным узлом...<br>
+                    > Проверка уровня допуска... [ОДОБРЕНО]<br>
+                    > Синхронизация данных флота... 100%<br>
+                    > Доступ к военно-политическому реестру открыт.
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="guide.html" class="btn-primary">Открыть Справочник</a>
+                    <a href="constructor.html" class="btn-outline">Перейти в Верфь</a>
+                </div>
+            </section>
+
+            <section class="quick-access">
+                <a href="factions.html" class="access-card">
+                    <span class="card-icon">♜</span>
+                    <h3>Фракции</h3>
+                    <p>Политическая расстановка сил, союзы и действующие государства Классической Эры.</p>
+                </a>
+                
+                <a href="guide.html" class="access-card">
+                    <span class="card-icon">⚔</span>
+                    <h3>Вооружение</h3>
+                    <p>Полный технический реестр: от легкой баллистики до артиллерийских дредноутов.</p>
+                </a>
+
+                <a href="pantheon.html" class="access-card">
+                    <span class="card-icon">♚</span>
+                    <h3>Пантеон</h3>
+                    <p>Зал Славы. Легендарные адмиралы, политики и герои прошлых конфликтов.</p>
+                </a>
+            </section>
+
+            <section class="updates-feed">
+                <h2 class="gold-title" style="font-size: 18px; margin-bottom: 15px;">Последние сводки разведки</h2>
+                <ul class="updates-list">
+                    <li>
+                        <span class="update-date">[23.02.3045]</span>
+                        <span class="update-text">Обновлен технический реестр. Добавлены спецификации тяжелого линейного корабля.</span>
+                    </li>
+                    <li>
+                        <span class="update-date">[19.02.3045]</span>
+                        <span class="update-text">Внесены изменения в систему бронирования: добавлены данные о сплаве Умгат.</span>
+                    </li>
+                    <li>
+                        <span class="update-date">[12.02.3045]</span>
+                        <span class="update-text">Открыт доступ к Инженерному терминалу верфи (Версия ПО: Project Shipyard 1.9.1).</span>
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

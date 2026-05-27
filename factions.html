@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реестр Фракций | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Реестр Галактики</h3>
+            <ul>
+                <li><a href="index.html">← вернуться на Главную</a></li>
+            </ul>
+        </aside>
+
+    <div class="wrapper">
+        <main class="content" style="width: 100%; max-width: 1200px; margin: 0 auto; padding-top: 40px;">
+            <h1 class="gold-title" style="text-align: center;">ГАЛАКТИЧЕСКИЙ РЕЕСТР</h1>
+            <p style="text-align: center; color: #8892b0; margin-bottom: 40px;">Официальный перечень признанных государств, корпораций и союзов.</p>
+
+            <h2 class="gold-title" style="border: none; color: #00e5ff; text-shadow: 0 0 10px #00e5ff;">I. ГЕГЕМОНЫ ГАЛАКТИКИ (НПС)</h2>
+            <div id="npc-factions-grid" class="factions-grid">
+                </div>
+
+            <h2 class="gold-title" style="border: none; color: #ffcc00; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); margin-top: 50px;">II. НЕЗАВИСИМЫЕ ГОСУДАРСТВА (ИГРОКИ)</h2>
+            <div id="player-factions-grid" class="factions-grid">
+                </div>
+        </main>
+    </div>
+
+    <div id="faction-modal" class="modal-overlay" onclick="closeFactionModal()">
+        <div class="modal-box" style="max-width: 700px;" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeFactionModal()">×</span>
+            
+            <div class="f-modal-header">
+                <img id="fm-heraldry" class="f-modal-heraldry" src="" alt="Герб">
+                <div id="fm-title" class="f-modal-title">Название Фракции</div>
+            </div>
+
+            <div class="faction-modal-body">
+                <div class="f-section-title">I. ПОЛИТИЧЕСКИЕ СВЕДЕНИЯ</div>
+                <div class="f-data-row"><span class="f-label">1. Полное название фракции:</span> <span id="fm-fullname" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">2. Форма правления и устройства:</span> <span id="fm-gov" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">3. Политический режим:</span> <span id="fm-regime" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">4. Глава фракции:</span> <span id="fm-leader" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">5. Тип цивилизации:</span> <span id="fm-civtype" class="f-value">...</span></div>
+
+                <div class="f-section-title">II. ОБЩИЕ СВЕДЕНИЯ</div>
+                <div class="f-data-row"><span class="f-label">1. Название столичной системы:</span> <span id="fm-system" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">ㅤㅤ– Название планеты:</span> <span id="fm-planet" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">2. Расположение на карте:</span> <span id="fm-coords" class="f-value">...</span></div>
+
+                <div class="f-section-title">III. КУЛЬТУРНЫЕ СВЕДЕНИЯ</div>
+                <div class="f-data-row"><span class="f-label">1. Биологический вид (Раса):</span> <span id="fm-race" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">2. Идеология / Этика:</span> <span id="fm-ideo" class="f-value">...</span></div>
+                <div class="f-data-row"><span class="f-label">3. Культурные особенности:</span> <span id="fm-culture" class="f-value">...</span></div>
+
+                <div class="f-section-title">IV. ИСТОРИЧЕСКИЕ СВЕДЕНИЯ</div>
+                <div class="f-data-row" style="margin-top: 10px;"><span class="f-label">Краткая история:</span></div>
+                <div id="fm-history" class="f-value" style="margin-top: 5px; text-align: justify; font-size: 0.95em;">...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // БАЗА ДАННЫХ ФРАКЦИЙ
+        const factionsData = [
+            // --- ФРАКЦИИ НПС ---
+            {
+                id: 'npc_alliance',
+                category: 'npc', // Указываем, что это НПС
+                heraldry: 'fraction/noinformation.png', // Путь к картинке герба
+                name: 'НЕИЗВЕСТНО',
+                shortDesc: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                
+                // Данные для анкеты
+                fullName: 'НЕИЗВЕСТНО',
+                gov: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                regime: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                leader: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                civType: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                system: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                planet: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                coords: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                race: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                ideo: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                culture: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                history: 'ИНФОРМАЦИЯ НЕДОСТУПНА'
+            },
+            {
+                id: 'npc_alliance',
+                category: 'npc', // Указываем, что это НПС
+                heraldry: 'fraction/noinformation.png', // Путь к картинке герба
+                name: 'НЕИЗВЕСТНО',
+                shortDesc: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                
+                // Данные для анкеты
+                fullName: 'НЕИЗВЕСТНО',
+                gov: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                regime: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                leader: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                civType: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                system: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                planet: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                coords: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                race: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                ideo: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                culture: 'ИНФОРМАЦИЯ НЕДОСТУПНА',
+                history: 'ИНФОРМАЦИЯ НЕДОСТУПНА'
+            },
+
+            // --- ФРАКЦИИ ИГРОКОВ ---
+            {
+                id: 'player_empire',
+                category: 'player', // Указываем, что это игрок
+                heraldry: 'fraction/ost-frontire.jpg', // Путь к картинке герба
+                name: 'Ост-Фронтирское Государство',
+                shortDesc: 'Агрессивная корпоратократия, стремящаяся монополизировать добычу редких минералов в секторе.',
+                
+                // Данные для анкеты
+                fullName: 'Ост-Фронтирское Государство',
+                gov: 'Корпоратократия',
+                regime: 'Плутократический',
+                leader: 'Наместник Гель',
+                civType: 'Фронтир',
+                system: 'Авалон',
+                planet: 'Супердайтория',
+                coords: 'X-24, Y-10',
+                race: 'Гумманоиды / Люди',
+                ideo: 'Индустриализм, Экспансионизм',
+                culture: 'Заложена идея развития собственного кармана через различное производство и продажу технологий под заказ.',
+                history: 'В Эре бескрайнего космического пространства, группа корпоративных разведчиков наткнулась на планету, богатую титаном. Выкупив права на колонизацию у Альянса, они основали там независимое государство, где правят деньги и совет директоров.'
+            }
+            // Чтобы добавить новую фракцию, просто поставь запятую после фигурной скобки и скопируй блок.
+        ];
+
+        // ФУНКЦИЯ ОТРИСОВКИ КАРТОЧЕК
+        function renderFactions() {
+            const npcGrid = document.getElementById('npc-factions-grid');
+            const playerGrid = document.getElementById('player-factions-grid');
+
+            factionsData.forEach(faction => {
+                const cardHTML = `
+                    <div class="faction-card" onclick="openFactionModal('${faction.id}')">
+                        <img class="faction-heraldry" src="${faction.heraldry}" alt="${faction.name}" onerror="this.src='https://via.placeholder.com/120x120?text=ГЕРБ'">
+                        <div class="faction-name">${faction.name}</div>
+                        <div class="faction-short-desc">${faction.shortDesc}</div>
+                    </div>
+                `;
+
+                // Раскидываем по сеткам в зависимости от категории
+                if (faction.category === 'npc') {
+                    npcGrid.innerHTML += cardHTML;
+                } else if (faction.category === 'player') {
+                    playerGrid.innerHTML += cardHTML;
+                }
+            });
+        }
+
+        // ФУНКЦИЯ ОТКРЫТИЯ ДОСЬЕ
+        function openFactionModal(factionId) {
+            // Ищем фракцию в базе по ID
+            const faction = factionsData.find(f => f.id === factionId);
+            if (!faction) return;
+
+            // Заполняем модальное окно данными
+            document.getElementById('fm-heraldry').src = faction.heraldry;
+            document.getElementById('fm-title').innerText = faction.name;
+            
+            document.getElementById('fm-fullname').innerText = faction.fullName;
+            document.getElementById('fm-gov').innerText = faction.gov;
+            document.getElementById('fm-regime').innerText = faction.regime;
+            document.getElementById('fm-leader').innerText = faction.leader;
+            document.getElementById('fm-civtype').innerText = faction.civType;
+            
+            document.getElementById('fm-system').innerText = faction.system;
+            document.getElementById('fm-planet').innerText = faction.planet;
+            document.getElementById('fm-coords').innerText = faction.coords;
+            
+            document.getElementById('fm-race').innerText = faction.race;
+            document.getElementById('fm-ideo').innerText = faction.ideo;
+            document.getElementById('fm-culture').innerText = faction.culture;
+            
+            document.getElementById('fm-history').innerText = faction.history;
+
+            // Показываем окно
+            document.getElementById('faction-modal').style.display = 'flex';
+        }
+
+        // ФУНКЦИЯ ЗАКРЫТИЯ ДОСЬЕ
+        function closeFactionModal() {
+            document.getElementById('faction-modal').style.display = 'none';
+        }
+
+        // Запускаем отрисовку при загрузке страницы
+        window.onload = renderFactions;
+    </script>
+</body>
+</html>

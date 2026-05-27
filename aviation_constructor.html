@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авиационный конструктор | Классическая Эра</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Управление</h3>
+            <ul>
+                <li><a href="constructors_hub.html">← Назад к конструкторам</a></li>
+                <li><a href="guide.html">Справочник</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1 class="gold-title">Аэрокосмический сборочный цех</h1>
+            <div class="meta-data">Версия ПО: AeroForge 1.0 (Интеграция ОН) | Статус: Активен</div>
+
+            <div class="builder-grid">
+                
+                <div class="config-col">
+                    <div class="panel">
+                        <h2>Базовый планер</h2>
+                        <div class="field">
+                            <label>Позывной / Название модели</label>
+                            <input type="text" id="shipName" placeholder="Введите название..." oninput="calc()">
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
+                            <div class="field">
+                                <label>Весовая категория</label>
+                                <select id="shipClass" onchange="handleClassChange()"></select>
+                            </div>
+                            <div class="field">
+                                <label>Тип аппарата</label>
+                                <select id="shipType" onchange="calc()"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h2>Силовая установка и Защита</h2>
+                        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px">
+                            <div class="field">
+                                <label>Микрореактор</label>
+                                <select id="reactorType" onchange="calc()"></select>
+                            </div>
+                            <div class="field">
+                                <label>Обшивка</label>
+                                <select id="armorType" onchange="calc()"></select>
+                            </div>
+                            <div class="field">
+                                <label>Генератор щита</label>
+                                <select id="shieldType" onchange="calc()"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Маршевые двигатели</label>
+                            <select id="engineType" onchange="calc()"></select>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h2>Системы вооружения</h2>
+                        <div id="weaponContainer"></div>
+                        <button class="btn" style="width: 100%; margin-top: 10px;" onclick="addItem('weapon')">+ Подвесить орудие</button>
+                    </div>
+                    
+                    <div class="panel">
+                        <h2>Авионика и Модули</h2>
+                        <div id="moduleContainer"></div>
+                        <button class="btn" style="width: 100%; margin-top: 10px;" onclick="addItem('module')">+ Установить модуль</button>
+                    </div>
+                </div>
+
+                <div class="builder-sidebar">
+                    <div class="panel" style="position:sticky; top:20px">
+                        <h2>Визуальная схема</h2>
+                        
+                        <div class="blueprint-panel">
+                            <svg class="blueprint-svg" viewBox="0 0 100 120" style="max-height: 200px; display: block; margin: 0 auto;">
+                                <path id="svg-hull" class="ship-part active-part" d="M50 10 L60 40 L85 80 L60 90 L50 110 L40 90 L15 80 L40 40 Z" />
+                                <path id="svg-weapons" class="ship-part" d="M25 85 L25 65 M75 85 L75 65" stroke-width="4" />
+                                <path id="svg-engines" class="ship-part" d="M42 95 L42 115 M58 95 L58 115" stroke-width="6" />
+                                <circle id="svg-shields" class="ship-part" cx="50" cy="65" r="50" fill="none" stroke-dasharray="5,5" style="opacity: 0; transition: 0.3s;" />
+                            </svg>
+                        </div>
+
+                        <h2 style="margin-top: 20px;">Текущие ТТХ</h2>
+                        <div id="statsBox"></div>
+                        <button class="btn" style="width:100%; margin-top:20px; border-color: var(--gold-accent); color: var(--gold-accent);" onclick="generateCard()">Сформировать спецификацию</button>
+                        
+                        <div id="copyBlock" class="card-output" style="display: none;">
+                            <textarea id="cardText" readonly style="width: 100%; height: 150px; background: rgba(0,0,0,0.5); color: #00e5ff; border: 1px solid #00e5ff; padding: 10px; margin-top: 10px; font-family: monospace; font-size: 12px;"></textarea>
+                            <button class="btn" style="width:100%; margin-top: 10px;" onclick="copyCardText()">Копировать текст</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+        </main>
+    </div>
+
+<script>
+// БАЗА ДАННЫХ АВИАЦИИ
+const data = {
+  light: { name: "Лёгкая авиация", baseON: 1, modON: 0.2, types: [
+    { name: "Истребитель", hp: 80, armor: 20, cost: 35 }, 
+    { name: "Истребитель-дрон", hp: 60, armor: 10, cost: 25 }, 
+    { name: "Разведывательный дрон", hp: 40, armor: 5, cost: 25 }
+  ]},
+  medium: { name: "Средняя авиация", baseON: 2, modON: 0.5, types: [
+    { name: "Перехватчик", hp: 120, armor: 40, cost: 60 }, 
+    { name: "Космический бомбардировщик", hp: 150, armor: 60, cost: 80 }
+  ]},
+  heavy: { name: "Тяжелая авиация", baseON: 3, modON: 1.0, types: [
+    { name: "Многоцелевой истребитель", hp: 200, armor: 80, cost: 120 }, 
+    { name: "Тяжелый бомбардировщик", hp: 300, armor: 120, cost: 150 },
+    { name: "Ракетоносец", hp: 250, armor: 100, cost: 140 }
+  ]},
+  cargo: { name: "Грузовые шаттлы", baseON: 1, modON: 0.5, types: [
+    { name: "Транспортный шаттл", hp: 200, armor: 50, cost: 50 }, 
+    { name: "Десантный шаттл", hp: 250, armor: 150, cost: 90 }
+  ]}
+};
+
+const reactorsByClass = {
+  light: [{name:"Микро-ячейка ПТ-1", energy:50, cost:5}, {name:"Ионный энергоблок ПТ-2", energy:100, cost:15}],
+  medium: [{name:"Стандартный реактор СТ-1", energy:150, cost:10}, {name:"Усиленный реактор СТ-2", energy:250, cost:25}],
+  heavy: [{name:"Двойной реактор ТЖ-1", energy:300, cost:20}, {name:"Плазменное ядро ТЖ-2", energy:500, cost:40}],
+  cargo: [{name:"Транспортный реактор ГР-1", energy:200, cost:10}, {name:"Коммерческий реактор ГР-2", energy:350, cost:25}]
+};
+
+const armorByClass = {
+  light: [{name:"Легкая дюрастиловая", armor:10, cost:5}, {name:"Противоосколочная сетка", armor:25, cost:10}],
+  medium: [{name:"Стандартная обшивка", armor:30, cost:10}, {name:"Композитные пластины", armor:60, cost:20}],
+  heavy: [{name:"Тяжелая броня", armor:80, cost:20}, {name:"Армированная наноброня", armor:150, cost:45}],
+  cargo: [{name:"Грузовая обшивка", armor:40, cost:10}, {name:"Десантное бронирование", armor:120, cost:30}]
+};
+
+const shieldsByClass = {
+  light: [{name:"Без щита", shield:0, energy:0, cost:0}, {name:"Легкий дефлектор", shield:50, energy:30, cost:15}],
+  medium: [{name:"Без щита", shield:0, energy:0, cost:0}, {name:"Стандартный дефлектор", shield:100, energy:60, cost:25}],
+  heavy: [{name:"Без щита", shield:0, energy:0, cost:0}, {name:"Тактический щит", shield:250, energy:120, cost:40}],
+  cargo: [{name:"Без щита", shield:0, energy:0, cost:0}, {name:"Навигационный дефлектор", shield:150, energy:80, cost:20}]
+};
+
+const enginesByClass = {
+  light: [{ name: "2 ионных маневровых двигателя", cost: 10, energy: 10, speed: 120 }, { name: "Плазменный форсажный двигатель", cost: 25, energy: 30, speed: 180 }],
+  medium: [{ name: "2 стандартных ионных двигателя", cost: 15, energy: 20, speed: 90 }, { name: "Сдвоенный плазменный ускоритель", cost: 35, energy: 50, speed: 140 }],
+  heavy: [{ name: "4 ионных маршевых двигателя", cost: 20, energy: 40, speed: 70 }, { name: "Векторный плазменный двигатель", cost: 50, energy: 80, speed: 110 }],
+  cargo: [{ name: "Грузовой ионный двигатель", cost: 15, energy: 30, speed: 50 }, { name: "Усиленный транспортный привод", cost: 30, energy: 60, speed: 75 }]
+};
+
+const weapons = {
+  "Курсовое вооружение": [
+    { name: "Сдвоенная лазерная пушка", cost: 5, energy: 10, dmg: 15 }, 
+    { name: "Тяжелый бластерный ретранслятор", cost: 15, energy: 25, dmg: 30 },
+    { name: "Скорострельная автопушка (Кинетика)", cost: 10, energy: 5, dmg: 20 }
+  ],
+  "Ракетное и бомбовое": [
+    { name: "Установка ракет 'Воздух-Воздух' (4 шт)", cost: 20, energy: 5, dmg: 60 }, 
+    { name: "Протонные торпеды (Для тяжелых/бомбер)", cost: 40, energy: 10, dmg: 150 },
+    { name: "Кластерные бомбы", cost: 30, energy: 5, dmg: 100 }
+  ],
+  "Спецоборудование": [
+    { name: "Хвостовая турель защиты", cost: 15, energy: 15, dmg: 10 },
+    { name: "Ионная пушка (Отключение систем)", cost: 25, energy: 40, dmg: 5 }
+  ]
+};
+
+const modules = {
+  "Авионика и Радары": [
+    { name: "Стандартный радар", cost: 5, energy: 10 }, 
+    { name: "Система захвата цели (Продвинутая)", cost: 15, energy: 20 },
+    { name: "Разведывательный сканер", cost: 20, energy: 30 }
+  ],
+  "Защита и РЭБ": [
+    { name: "Генератор помех (ECM)", cost: 20, energy: 25 }, 
+    { name: "Тепловые ловушки (Flares)", cost: 10, energy: 5 },
+    { name: "Усиленные компенсаторы перегрузок", cost: 15, energy: 10 }
+  ],
+  "Служебные": [
+    { name: "Система жизнеобеспечения (Пилот)", cost: 5, energy: 5 },
+    { name: "Гипердвигатель 1-го класса", cost: 40, energy: 60 },
+    { name: "Увеличенный топливный бак", cost: 10, energy: 0 }
+  ]
+};
+
+function $id(id){ return document.getElementById(id); }
+
+function init(){
+  const sClass = $id('shipClass');
+  for(let k in data){
+    let opt = document.createElement('option');
+    opt.value = k; opt.innerText = data[k].name;
+    sClass.appendChild(opt);
+  }
+  updateClassDependencies();
+}
+
+function handleClassChange() {
+  $id('weaponContainer').innerHTML = '';
+  $id('moduleContainer').innerHTML = '';
+  updateClassDependencies();
+}
+
+function updateClassDependencies(){
+  const k = $id('shipClass').value;
+  const sType = $id('shipType'); sType.innerHTML = '';
+  data[k].types.forEach((t, i) => {
+    let opt = document.createElement('option');
+    opt.value = i; opt.innerText = t.name;
+    sType.appendChild(opt);
+  });
+  
+  const sReact = $id('reactorType'); sReact.innerHTML = '';
+  reactorsByClass[k].forEach((r, i) => {
+    let opt = document.createElement('option');
+    opt.value = i; opt.innerText = `${r.name} (${r.energy} E)`;
+    sReact.appendChild(opt);
+  });
+  
+  const sArmor = $id('armorType'); sArmor.innerHTML = '';
+  armorByClass[k].forEach((a, i) => {
+    let opt = document.createElement('option');
+    opt.value = i; opt.innerText = a.name;
+    sArmor.appendChild(opt);
+  });
+  
+  const sShield = $id('shieldType'); sShield.innerHTML = '';
+  shieldsByClass[k].forEach((s, i) => {
+    let opt = document.createElement('option');
+    opt.value = i; opt.innerText = s.name;
+    sShield.appendChild(opt);
+  });
+  
+  const sEng = $id('engineType'); sEng.innerHTML = '';
+  enginesByClass[k].forEach((e, i) => {
+    let opt = document.createElement('option');
+    opt.value = i; opt.innerText = e.name;
+    sEng.appendChild(opt);
+  });
+  calc();
+}
+
+function addItem(type){
+  const k = $id('shipClass').value;
+  const container = $id(type === 'weapon' ? 'weaponContainer' : 'moduleContainer');
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  const sel = document.createElement('select');
+  sel.onchange = calc;
+  const source = type === 'weapon' ? weapons : modules;
+
+  for(let group in source){
+    // Логика ограничений: Легкая авиация не носит тяжелые протонные торпеды
+    if(type === 'weapon') {
+      if(k === 'light' && group === 'Ракетное и бомбовое') continue;
+    }
+
+    let g = document.createElement('optgroup');
+    g.label = group;
+    source[group].forEach((item, i) => {
+      let opt = document.createElement('option');
+      opt.value = JSON.stringify({g: group, idx: i});
+      opt.innerText = item.name;
+      g.appendChild(opt);
+    });
+    sel.appendChild(g);
+  }
+  
+  if(sel.options.length === 0) return;
+
+  row.appendChild(sel);
+  if(type === 'weapon'){
+    const qty = document.createElement('input');
+    qty.type = 'number'; qty.value = 1; qty.min = 1; qty.className = 'qty-input';
+    qty.oninput = calc;
+    row.appendChild(qty);
+  }
+  const del = document.createElement('button');
+  del.className = 'btn-del'; del.innerText = '✕';
+  del.onclick = () => { row.remove(); calc(); };
+  row.appendChild(del);
+  container.appendChild(row);
+  calc();
+}
+
+function calc(){
+  const k = $id('shipClass').value;
+  const tIdx = $id('shipType').value || 0;
+  const rIdx = $id('reactorType').value || 0;
+  const aIdx = $id('armorType').value || 0;
+  const sIdx = $id('shieldType').value || 0;
+  const eIdx = $id('engineType').value || 0;
+
+  const typeObj = data[k].types[tIdx];
+  const reactObj = reactorsByClass[k][rIdx];
+  const armorObj = armorByClass[k][aIdx];
+  const shieldObj = shieldsByClass[k][sIdx];
+  const engObj = enginesByClass[k][eIdx];
+
+  let totalCost = typeObj.cost + reactObj.cost + armorObj.cost + shieldObj.cost + engObj.cost;
+  let totalEnergyCons = shieldObj.energy + engObj.energy;
+  let totalDmg = 0;
+  let totalON = data[k].baseON;
+
+  document.querySelectorAll('#weaponContainer .item-row').forEach(row => {
+    const s = JSON.parse(row.querySelector('select').value);
+    const q = parseInt(row.querySelector('input').value) || 0;
+    const w = weapons[s.g][s.idx];
+    totalCost += w.cost * q; 
+    totalON += q * data[k].modON; 
+    totalEnergyCons += w.energy * q; 
+    totalDmg += w.dmg * q;
+  });
+
+  document.querySelectorAll('#moduleContainer .item-row').forEach(row => {
+    const s = JSON.parse(row.querySelector('select').value);
+    const m = modules[s.g][s.idx];
+    totalCost += m.cost; 
+    totalON += data[k].modON; 
+    totalEnergyCons += m.energy;
+  });
+
+  render({
+    hp: typeObj.hp, armor: typeObj.armor + armorObj.armor, shield: shieldObj.shield,
+    cost: totalCost, on: totalON, speed: engObj.speed,
+    eCons: totalEnergyCons, eMax: reactObj.energy, dmg: totalDmg
+  });
+}
+
+function render(s){
+  const energyOk = s.eCons <= s.eMax;
+  
+  const partWeapons = $id('svg-weapons');
+  const partShields = $id('svg-shields');
+  const partEngines = $id('svg-engines');
+  const partHull = $id('svg-hull');
+
+  if(s.dmg > 0) partWeapons.classList.add('active-part');
+  else partWeapons.classList.remove('active-part');
+
+  if(s.shield > 0) partShields.style.opacity = '1';
+  else partShields.style.opacity = '0';
+
+  if(s.speed > 0) partEngines.classList.add('active-part');
+  else partEngines.classList.remove('active-part');
+
+  if(!energyOk) partHull.classList.add('warning-part');
+  else partHull.classList.remove('warning-part');
+
+  $id('statsBox').innerHTML = `
+    <div class="stats-row"><span>Прочность:</span><span>${s.hp.toLocaleString()} HP</span></div>
+    <div class="stats-row"><span>Бронирование:</span><span>${s.armor.toLocaleString()} AR</span></div>
+    <div class="stats-row"><span>Щиты:</span><span>${s.shield > 0 ? s.shield.toLocaleString() + ' ед.' : 'Отсутствуют'}</span></div>
+    <div class="stats-row"><span>Огневая мощь:</span><span>${s.dmg.toLocaleString()} урон</span></div>
+    <div class="stats-row"><span>Скорость / Манёвр:</span><span>${s.speed} у.е.</span></div>
+    <div class="stats-row"><span>Стоимость сборки:</span><span style="color: var(--gold);">${s.cost.toLocaleString()} ГС</span></div>
+    <div class="stats-row"><span>Очки Науки:</span><span style="color: var(--cyan);">${s.on.toFixed(1)} ОН</span></div>
+    <div class="stats-row"><span>Нагрузка энергосети:</span><span class="${energyOk?'':'warning'}">${s.eCons} / ${s.eMax} E</span></div>
+  `;
+}
+
+function generateCard(){
+  const name = $id('shipName').value || "Борт без позывного";
+  const k = $id('shipClass').value;
+  const tIdx = $id('shipType').value;
+  const engObj = enginesByClass[k][$id('engineType').value];
+  const typeObj = data[k].types[tIdx];
+  const reactObj = reactorsByClass[k][$id('reactorType').value];
+  const armorObj = armorByClass[k][$id('armorType').value];
+  const shieldObj = shieldsByClass[k][$id('shieldType').value];
+
+  let card = `ПОЗЫВНОЙ / МОДЕЛЬ: ${name.toUpperCase()}\n`;
+  card += `Класс: ${data[k].name} (${typeObj.name})\n`;
+  card += `------------------------------------------\n`;
+  card += `ПЛАНЕР: ${typeObj.hp} HP / ${typeObj.armor + armorObj.armor} AR\n`;
+  card += `ЩИТЫ: ${shieldObj.shield > 0 ? shieldObj.shield + ' ед.' : 'Отсутствуют'}\n`;
+  card += `СКОРОСТЬ: ${engObj.speed} у.е. (${engObj.name})\n`;
+  card += `ПИТАНИЕ: ${reactObj.name} (${reactObj.energy} E)\n`;
+  card += `------------------------------------------\nСИСТЕМЫ ВООРУЖЕНИЯ:\n`;
+  
+  const weaponsList = document.querySelectorAll('#weaponContainer .item-row');
+  if(weaponsList.length === 0) card += ` - Без вооружения\n`;
+  weaponsList.forEach(row => {
+    const s = JSON.parse(row.querySelector('select').value);
+    const q = row.querySelector('input').value;
+    const w = weapons[s.g][s.idx];
+    card += ` - ${w.name} x${q} (${w.dmg * q} урон)\n`;
+  });
+
+  card += `\nАВИОНИКА И МОДУЛИ:\n`;
+  const modulesList = document.querySelectorAll('#moduleContainer .item-row');
+  if(modulesList.length === 0) card += ` - Базовая комплектация\n`;
+  modulesList.forEach(row => {
+    const s = JSON.parse(row.querySelector('select').value);
+    card += ` - ${modules[s.g][s.idx].name}\n`;
+  });
+
+  const final = $id('statsBox').innerText.replace(/\n/g, '\n');
+  card += `------------------------------------------\nИТОГОВАЯ СПЕЦИФИКАЦИЯ:\n${final}`;
+  $id('cardText').value = card;
+  $id('copyBlock').style.display = 'block';
+}
+
+function copyCardText(){ $id('cardText').select(); document.execCommand('copy'); alert("Спецификация скопирована!"); }
+window.onload = init;
+</script>
+</body>
+</html>

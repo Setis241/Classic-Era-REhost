@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интерактивная карта | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="map-body">
+
+<div id="map-viewport">
+            <div id="map-canvas">
+        <img src="assets/map/background_galaxy.png" id="bg-layer" alt="Galaxy">
+        
+        <img src="assets/map/hyperlanes.png" id="hyperlanes-layer" alt="Маршруты"> <div id="stars-layer"></div>
+        </div>
+
+    <div id="system-info-panel" class="hidden">
+        <div class="panel-content">
+            <span class="close-btn" onclick="closePanel()">&times;</span>
+            <h2 id="sys-name"></h2>
+            <div id="sys-faction-badge"></div>
+            <p id="sys-desc"></p>
+            <hr>
+            <h3>Планетарный состав:</h3>
+            <div id="planets-list"></div>
+        </div>
+    </div>
+
+<div id="coord-panel">X: 0 | Y: 0</div>
+    
+    <script src="map_data.js"></script>
+    <script src="map_engine.js"></script>
+</body>
+</html>

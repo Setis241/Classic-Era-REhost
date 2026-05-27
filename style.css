@@ -1,0 +1,3377 @@
+/* Основной текст: технологичный, но удобный для чтения */
+body {
+    font-family: 'Exo 2', sans-serif;
+}
+
+/* Заголовки, логотип и навигация: интерфейс бортового компьютера */
+h1, h2, h3, .logo, .gold-title, .main-nav a, .neon-link {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Мета-данные и интерфейсные приписки */
+.meta-data {
+    font-family: 'Courier New', monospace;
+}
+/* Базовые переменные цветов для удобства */
+:root {
+    --bg-color: #050914;      /* Очень темный синий, почти космос */
+    --panel-bg: #0b1325;      /* Чуть более светлый фон для панелей */
+    --text-main: #d1d5db;     /* Светло-серый для текста (не режет глаза) */
+    --gold-accent: #ffcc00;   /* Золотой для заголовков и важных элементов */
+    --neon-blue: #00e5ff;     /* Неоновый голубой для свечения */
+}
+
+/* Общие настройки страницы */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- ШАПКА САЙТА --- */
+.top-header {
+    background-color: var(--panel-bg);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); /* Неоновое свечение вниз */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold-accent);
+    letter-spacing: 2px;
+    
+    /* Добавляем магию левитации: */
+    animation: spaceFloat 4s ease-in-out infinite;
+}
+
+.main-nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: var(--gold-accent);
+}
+
+.neon-link {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.6); /* Свечение текста */
+}
+
+/* --- СЕТКА (РАСПОЛОЖЕНИЕ БЛОКОВ) --- */
+.wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Левая колонка 250px, правая занимает всё остальное */
+    gap: 30px;
+    padding: 30px;
+    flex-grow: 1;
+}
+
+/* --- БОКОВОЕ МЕНЮ --- */
+.sidebar {
+    background-color: var(--panel-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--gold-accent); /* Золотая полоса слева */
+}
+
+.sidebar h3 {
+    color: var(--gold-accent);
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: var(--neon-blue);
+    padding-left: 8px; /* Легкий сдвиг вправо при наведении мыши */
+}
+
+/* --- ОСНОВНАЯ СТАТЬЯ --- */
+.content {
+    background-color: var(--panel-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.gold-title {
+    color: var(--gold-accent);
+    margin-top: 0;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+.meta-data {
+    font-size: 14px;
+    color: #8892b0;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+/* =========================================
+   ИНТЕГРАЦИЯ КОНСТРУКТОРА КОРАБЛЕЙ
+   ========================================= */
+
+/* Переназначаем вашу переменную акцента для совместимости с JS */
+:root {
+    --accent: var(--neon-blue); 
+}
+
+/* Сетка внутри центральной панели (Левая часть - настройки, Правая - ТТХ) */
+.builder-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Панели с категориями оборудования */
+.panel {
+    background: var(--panel-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 229, 255, 0.2); /* Неоновая тусклая рамка */
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+.panel h2 {
+    margin: 0 0 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--gold-accent); /* Золотые подзаголовки */
+    border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 8px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Поля ввода и списки */
+.field { margin-bottom: 15px; }
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #8892b0;
+    text-transform: uppercase;
+}
+
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    background: #050914;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Exo 2', sans-serif;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+}
+
+select:focus, input:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+}
+
+/* Строки характеристик (ТТХ) */
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(0, 229, 255, 0.2);
+    font-size: 15px;
+}
+.stats-row span:last-child {
+    font-weight: 700;
+    color: var(--neon-blue);
+    font-family: 'Courier New', monospace;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--neon-blue);
+    color: #050914;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+/* Элементы добавления модулей */
+.item-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #080d1c;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 204, 0, 0.1);
+}
+
+.qty-input { width: 70px !important; text-align: center; }
+
+/* Кнопка удаления */
+.btn-del {
+    background: transparent;
+    color: #ff5555;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ff5555;
+    transition: 0.2s;
+}
+.btn-del:hover { background: #ff5555; color: #fff; }
+
+/* Окно вывода отчета */
+.card-output {
+    margin-top: 20px;
+    background: #050914;
+    border: 1px dashed var(--gold-accent);
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+textarea#cardText {
+    width: 100%;
+    height: 350px;
+    font-family: 'Courier New', monospace;
+    background: transparent;
+    border: none;
+    resize: none;
+    color: var(--gold-accent);
+    font-size: 13px;
+    outline: none;
+}
+
+.warning { color: #ff5555; text-shadow: 0 0 8px rgba(255,85,85,0.4); }
+/* =========================================
+   СТИЛИ ДЛЯ СПРАВОЧНИКА (АККОРДЕОНЫ)
+   ========================================= */
+
+/* Главный блок категории (например, "Корабли и классы") */
+.section-main { 
+    margin-bottom: 25px; 
+    border: 1px solid rgba(0, 229, 255, 0.2); 
+    border-radius: 8px; 
+    background: var(--panel-bg); 
+    overflow: hidden; 
+    box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+/* Заголовок главной категории */
+.section-header { 
+    background: linear-gradient(90deg, #050914, #080d1c); 
+    color: var(--gold-accent); 
+    padding: 12px 20px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.section-body { padding: 15px; }
+
+/* Блок подкатегории (например, "Специализация: Корвет") */
+.sub-block { 
+    background: #050914; 
+    border: 1px solid rgba(0, 229, 255, 0.1); 
+    border-radius: 6px; 
+    margin-bottom: 10px; 
+    transition: border-color 0.3s;
+}
+
+.sub-block:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+/* Кликабельный заголовок подкатегории */
+.sub-header { 
+    padding: 12px 15px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    color: var(--neon-blue); 
+    font-weight: bold; 
+    font-size: 14px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Скрытый контент (открывается по клику) */
+.sub-content { 
+    display: none; 
+    padding: 0 15px 15px 15px; 
+    border-top: 1px dashed rgba(0, 229, 255, 0.2); 
+}
+
+/* Отдельная запись в справочнике */
+.entry { 
+    margin-top: 15px; 
+    padding-bottom: 15px; 
+    border-bottom: 1px solid rgba(255, 204, 0, 0.05); 
+}
+.entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+.entry label { 
+    display: block; 
+    color: var(--gold-accent); 
+    font-size: 14px; 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+    text-transform: uppercase; 
+    font-family: 'Orbitron', sans-serif;
+}
+
+.desc-text { 
+    font-size: 14px; 
+    color: var(--text-main); 
+    opacity: 0.9; 
+    line-height: 1.6;
+}
+
+/* Индикаторы характеристик (щиты) */
+.stat-row { margin-top: 8px; display: flex; align-items: center; gap: 10px; }
+.stat-bar-bg { flex-grow: 1; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+.stat-bar-fill { height: 100%; border-radius: 3px; box-shadow: 0 0 8px currentColor; }
+.stat-val { font-size: 12px; width: 35px; font-weight: bold; color: var(--neon-blue); font-family: 'Courier New', monospace; }
+
+/* Бирки (чипы) реакторов */
+.v-chip { 
+    display: inline-block; 
+    background: rgba(0, 229, 255, 0.05); 
+    border: 1px solid var(--neon-blue); 
+    color: var(--neon-blue); 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    margin: 6px 6px 0 0;
+    font-family: 'Courier New', monospace;
+}
+/* =========================================
+   СТИЛИ ДЛЯ КАРТИНОК И ИЛЛЮСТРАЦИЙ
+   ========================================= */
+
+/* =========================================
+   СТИЛИ ДЛЯ КАРТИНОК И ИЛЛЮСТРАЦИЙ
+   ========================================= */
+
+.lore-image {
+    display: block; /* Заставляет картинку вести себя как самостоятельный блок */
+    width: 100%; /* Растягивается по ширине... */
+    max-width: 800px; /* ...НО никогда не станет шире 800 пикселей */
+    height: auto; /* Жестко сохраняет пропорции корабля, чтобы его не сплющило */
+    margin: 20px auto 30px auto; /* 20px отступ сверху, авто-центр по бокам, 30px отступ до текста снизу */
+    
+    /* Декоративная часть */
+    border: 1px solid var(--neon-blue); /* Неоновая рамка */
+    border-radius: 8px; /* Слегка скругляем углы */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); /* Приятное свечение */
+}
+/* =========================================
+   СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (КЛАССИЧЕСКАЯ ЭРА)
+   ========================================= */
+
+/* Заглавный экран (Hero Section) */
+.hero-section {
+    position: relative;
+    padding: 60px 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 204, 0, 0.2); /* Золотая тусклая рамка */
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #050914 0%, #0b1325 100%);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.05);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Эффект фоновой картинки (если добавите её позже) */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at center, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-title {
+    position: relative;
+    font-size: 36px;
+    color: var(--gold-accent);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0 0 15px 0;
+    text-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+}
+
+/* Терминальная строка загрузки */
+.terminal-text {
+    position: relative;
+    font-family: 'Courier New', monospace;
+    color: #4ade80; /* Терминальный зеленый */
+    font-size: 14px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    text-align: left;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px 25px;
+    border-left: 3px solid #4ade80;
+    border-radius: 4px;
+}
+
+/* Кнопки на главном экране */
+.hero-buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: var(--gold-accent);
+    color: #050914;
+    padding: 14px 28px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+}
+
+.btn-primary:hover {
+    background: #ffe066;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--neon-blue);
+    padding: 14px 28px;
+    font-size: 14px;
+    border: 1px solid var(--neon-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 229, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Сетка карточек быстрого доступа */
+.quick-access {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.access-card {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    border-radius: 6px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: 0.3s;
+    text-decoration: none;
+    color: var(--text-main);
+    display: block;
+}
+
+.access-card:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 229, 255, 0.05);
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 32px;
+    color: var(--neon-blue);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.access-card h3 {
+    color: var(--gold-accent);
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+
+.access-card p {
+    font-size: 13px;
+    color: #8892b0;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Лента обновлений базы данных */
+.updates-feed {
+    background: var(--panel-bg);
+    border: 1px dashed rgba(255, 204, 0, 0.3);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.updates-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.updates-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+    display: flex;
+    gap: 15px;
+}
+
+.updates-list li:last-child {
+    border-bottom: none;
+}
+
+.update-date {
+    color: var(--neon-blue);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    min-width: 100px;
+}
+/* =========================================
+   СТИЛИ ДЛЯ ПАНТЕОНА ВЕТЕРАНОВ
+   ========================================= */
+
+/* Заголовки категорий Пантеона */
+.pantheon-category {
+    text-align: center;
+    color: var(--gold-accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px dashed rgba(255, 204, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+/* Сетка на 2 колонки (Создатели) */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Сетка на 3 колонки (Ветераны) */
+.grid-3-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* Сама карточка ветерана */
+.v-card {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+.v-card:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+/* Аватарка в карточке */
+.v-avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%; /* Делает картинку круглой */
+    border: 2px solid var(--gold-accent);
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+}
+
+.v-name {
+    color: var(--neon-blue);
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.v-dates {
+    color: #8892b0;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Блок благодарностей внизу */
+.thanks-block {
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px dashed var(--neon-blue);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    color: var(--text-main);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* --- ВСПЛЫВАЮЩЕЕ ОКНО (МОДАЛКА) --- */
+.modal-overlay {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(5, 9, 20, 0.85); /* Затемнение фона */
+    backdrop-filter: blur(5px); /* Легкое размытие заднего фона */
+    z-index: 1000; /* Поверх всего сайта */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: #0b1325;
+    border: 1px solid var(--gold-accent);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(255, 204, 0, 0.15);
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    color: #ff5555;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: #ff1111;
+    transform: scale(1.1);
+}
+
+#m-desc {
+    margin-top: 20px;
+    text-align: left;
+    color: var(--text-main);
+    line-height: 1.6;
+    font-size: 15px;
+    border-top: 1px dashed rgba(0, 229, 255, 0.3);
+    padding-top: 20px;
+}
+/* =========================================
+   СТИЛИ ДЛЯ СТРАНИЦЫ МЕХАНИК (СЕТКА 2 В РЯД)
+   ========================================= */
+
+.mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Специальное правило для последнего (пятого) блока, чтобы он был по центру */
+.mechanics-grid .access-card:last-child:nth-child(odd) {
+    grid-column: 1 / span 2; /* Растягиваем на две колонки */
+    justify-self: center;    /* Центрируем саму карточку */
+    width: calc(50% - 12.5px); /* Делаем ширину как у остальных */
+}
+
+.mechanics-card {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    border-radius: 8px;
+    padding: 30px;
+    text-decoration: none;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mechanics-card:hover {
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.1);
+    transform: translateY(-5px);
+}
+/* =========================================
+   СТИЛИ ДЛЯ ОФОРМЛЕНИЯ ТЕКСТА ПРАВИЛ
+   ========================================= */
+
+/* Декоративная цитата/манифест */
+.manifest-box {
+    border-left: 4px solid var(--gold-accent);
+    background: rgba(255, 204, 0, 0.03);
+    padding: 20px 30px;
+    margin: 20px 0;
+    font-style: italic;
+    position: relative;
+}
+
+.manifest-box::before {
+    content: "“";
+    position: absolute;
+    top: -10px; left: 10px;
+    font-size: 60px;
+    color: rgba(255, 204, 0, 0.1);
+    font-family: serif;
+}
+
+/* Выделение важных пунктов (иконка + текст) */
+.rule-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 229, 255, 0.02);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 229, 255, 0.05);
+}
+
+.rule-icon {
+    color: var(--gold-accent);
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* Красный блок для жестких запретов */
+.danger-zone {
+    border: 1px solid #ff4d4d;
+    background: rgba(255, 77, 77, 0.05);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 25px 0;
+}
+
+.danger-zone h3 {
+    color: #ff4d4d;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+/* Разделитель между логическими блоками */
+.hr-space {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent);
+    margin: 40px 0;
+}
+/* =========================================
+   СТИЛИ ДЛЯ СТРАНИЦЫ ПЛАНЕТОЛОГИИ
+   ========================================= */
+
+.planet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.planet-card {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    border-radius: 12px;
+    padding: 0; /* Убираем паддинг, чтобы картинка была вплотную */
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.planet-card:hover {
+    border-color: var(--gold-accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 204, 0, 0.05);
+}
+
+.planet-img-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+}
+
+.planet-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.planet-card:hover .planet-img-container img {
+    transform: scale(1.1);
+}
+
+.planet-info-short {
+    padding: 20px;
+    text-align: center;
+}
+
+.planet-info-short h3 {
+    color: var(--gold-accent);
+    font-family: 'Orbitron', sans-serif;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.planet-stats-preview {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--neon-blue);
+}
+
+/* Стили для модалки планеты */
+.p-modal-stats {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 229, 255, 0.05);
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 20px;
+    color: var(--gold-accent);
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #8892b0;
+}
+/* =========================================
+   СТИЛИ ДЛЯ РАЗДЕЛА ЭКСПАНСИИ
+   ========================================= */
+
+.expansion-panel {
+    background: rgba(0, 229, 255, 0.03);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.expansion-panel h2 {
+    color: var(--gold-accent);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin-top: 0;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.op-meta {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.op-badge {
+    padding: 8px 15px;
+    background: rgba(255, 204, 0, 0.1);
+    border: 1px solid var(--gold-accent);
+    color: var(--gold-accent);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.op-badge.blue {
+    background: rgba(0, 229, 255, 0.1);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+.expansion-note {
+    border-left: 3px solid var(--neon-blue);
+    padding-left: 15px;
+    font-style: italic;
+    color: #8892b0;
+    margin: 15px 0;
+}
+/* =========================================
+   СТИЛИ ДЛЯ БОЕВОГО УСТАВА
+   ========================================= */
+
+.combat-section {
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.combat-section.ground {
+    border-color: #4ade80; /* Зеленый акцент для наземных боев */
+}
+
+.quote-gen {
+    font-style: italic;
+    color: var(--gold-accent);
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.victory-conditions {
+    background: rgba(255, 204, 0, 0.05);
+    border: 1px dashed var(--gold-accent);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.victory-conditions h4 {
+    margin-top: 0;
+    color: var(--gold-accent);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.victory-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.victory-list li::before {
+    content: "◈ ";
+    color: var(--gold-accent);
+}
+/* =========================================
+   ФИНАЛЬНОЕ ДРЕВО ТЕХНОЛОГИЙ (НА ВЕСЬ ЭКРАН)
+   ========================================= */
+
+/* Растягиваем основной контейнер контента */
+.wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 100%; /* Убираем любые ограничения ширины */
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    padding: 20px 40px !important;
+    max-width: 100% !important; /* Принудительно на весь экран */
+}
+
+/* Сетка для веток */
+.tech-tree-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+    margin-top: 30px;
+    align-items: flex-start;
+}
+
+/* Сами ветки */
+.tech-branch {
+    flex: 1; /* Каждая ветка тянется на 33.3% ширины */
+    min-width: 300px;
+    background: rgba(0, 229, 255, 0.03);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Заголовки веток */
+.tech-branch h2 {
+    color: var(--gold-accent);
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 3px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 15px;
+}
+
+/* Карточки технологий */
+.tech-node {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tech-node:hover {
+    background: rgba(0, 229, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ВОЗВРАЩАЕМ ЦВЕТА (Тиры) */
+.tier-1 { border-left: 5px solid #4ade80 !important; } /* Зеленый - 10 ОН */
+.tier-2 { border-left: 5px solid #3b82f6 !important; } /* Синий - 20 ОН */
+.tier-3 { border-left: 5px solid #a855f7 !important; } /* Фиолетовый - 30 ОН */
+
+.cost-tag {
+    display: block;
+    font-size: 11px;
+    color: #8892b0;
+    margin-top: 5px;
+    font-family: monospace;
+}
+/* =========================================
+   СТИЛИ ДЛЯ РАЗДЕЛА СТРОИТЕЛЬСТВА
+   ========================================= */
+
+.build-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.build-card {
+    background: rgba(10, 20, 30, 0.7);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.build-card:hover {
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.1);
+}
+
+.build-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.build-name {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold-accent);
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.build-price {
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--neon-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.slot-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.slot-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 4px;
+}
+
+.slot-free {
+    border-color: #4ade80;
+    color: #4ade80;
+}
+
+.build-tag {
+    font-size: 12px;
+    color: #8892b0;
+    margin-top: 10px;
+    display: block;
+    line-height: 1.4;
+}
+
+.section-divider {
+    grid-column: 1 / -1;
+    margin: 40px 0 20px;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold-accent);
+    text-align: center;
+    letter-spacing: 5px;
+    background: rgba(255, 204, 0, 0.05);
+    padding: 10px;
+    border-top: 1px solid var(--gold-accent);
+    border-bottom: 1px solid var(--gold-accent);
+}
+/* =========================================
+   СТИЛИ ЭКОНОМИКИ И ТОРГОВЛИ
+   ========================================= */
+
+.economy-header {
+    background: linear-gradient(90deg, rgba(255, 204, 0, 0.1) 0%, rgba(0, 229, 255, 0.05) 100%);
+    border-left: 4px solid var(--gold-accent);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 0 8px 8px 0;
+}
+
+.trade-route-box {
+    background: rgba(0, 229, 255, 0.03);
+    border: 1px dashed var(--neon-blue);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.calc-formula {
+    font-family: 'Courier New', monospace;
+    background: #000;
+    padding: 10px;
+    color: #4ade80;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.warning-box {
+    border: 1px solid #ff4d4d;
+    background: rgba(255, 77, 77, 0.05);
+    padding: 15px;
+    margin: 20px 0;
+    color: #ff4d4d;
+    font-size: 14px;
+}
+.blueprint-panel {
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.05) 0%, transparent 80%);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 250px;
+}
+
+.blueprint-svg {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.2));
+}
+
+.ship-part {
+    fill: rgba(0, 229, 255, 0.05);
+    stroke: rgba(0, 229, 255, 0.3);
+    stroke-width: 1.5;
+    transition: all 0.4s ease;
+}
+
+/* Классы подсветки */
+.active-part {
+    fill: rgba(0, 229, 255, 0.2);
+    stroke: #00e5ff;
+    filter: drop-shadow(0 0 5px #00e5ff);
+}
+
+.warning-part {
+    fill: rgba(255, 77, 77, 0.2);
+    stroke: #ff4d4d;
+}
+/* =========================================
+   ИНТЕРФЕЙС ГАЛАКТИЧЕСКОЙ КАРТЫ
+   ========================================= */
+
+/* Контейнер-окно для карты */
+#map-viewport {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto; /* Позволяет скроллить карту в разные стороны */
+    background: #000;
+    cursor: grab;
+}
+
+#map-viewport:active {
+    cursor: grabbing;
+}
+
+/* Сама подложка карты */
+#map-canvas {
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#bg-layer {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Слой тумана (SVG) */
+#fog-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Чтобы туман не мешал кликать по звездам */
+}
+
+/* =========================================
+   ЗВЕЗДЫ И ПОДПИСИ
+   ========================================= */
+
+.star-sprite {
+    position: absolute;
+    transform: translate(-50%, -50%); /* Центрирует всю группу по координатам */
+    z-index: 10;
+    
+    /* Добавляем Flexbox для идеального выравнивания */
+    display: flex;
+    flex-direction: column; /* Ставим элементы в столбик (звезда над текстом) */
+    align-items: center;    /* Выравниваем всё строго по центру */
+    
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.star-sprite:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: brightness(1.3);
+}
+
+.star-sprite img {
+    width: 64px; 
+    height: 64px;
+    object-fit: contain; /* Защита от сплющивания */
+    /* Убрали display: block, в Flexbox он не нужен */
+}
+
+.star-label {
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px; /* Чуть увеличили шрифт для читаемости */
+    /* МАГИЯ НЕОНА: многослойное свечение */
+    text-shadow: 
+        0 0 5px #00e5ff, 
+        0 0 10px #00e5ff, 
+        0 0 20px #00e5ff, 
+        0 0 40px #00e5ff,
+        0 0 2px #000; /* Тонкий черный контур, чтобы текст не сливался со свечением */
+    margin-top: 8px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+/* Специальный класс для гигантских звезд (Ядро, аномалии) */
+.giant-star img {
+    width: 350px; 
+    height: 350px;
+    filter: drop-shadow(0 0 80px rgba(255, 204, 0, 1));
+}
+
+.giant-star .star-label {
+    font-size: 18px; 
+    color: #ffcc00; 
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #000;
+}
+
+/* =========================================
+   ИНФО-ПАНЕЛЬ И РАМОЧКИ ПЛАНЕТ
+   ========================================= */
+
+#system-info-panel {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 350px;
+    background: rgba(5, 15, 25, 0.95);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    color: #fff;
+    z-index: 100;
+    padding: 20px;
+    border-radius: 0 15px 0 15px;
+    backdrop-filter: blur(10px);
+}
+
+.hidden { display: none; }
+
+.close-btn {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--neon-blue);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Стиль карточки планеты */
+.planet-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.planet-card:hover {
+    border-color: var(--gold-accent);
+    background: rgba(255, 204, 0, 0.05);
+}
+
+/* Рамочка для PNG планеты */
+.planet-frame {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%; /* Круглая рамка */
+    padding: 2px;
+    background: #000;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.planet-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.planet-card p {
+    margin: 0;
+    font-weight: bold;
+    color: var(--gold-accent);
+}
+
+.planet-card small {
+    color: #8892b0;
+}
+#map-canvas {
+    position: relative;
+    transition: transform 0.1s ease-out; /* Плавность зума */
+    will-change: transform;
+}
+
+#map-viewport {
+    /* Оставляем как было, но убедись, что overflow: auto; */
+    overflow: scroll; 
+}
+#map-canvas {
+    position: relative;
+    transition: transform 0.1s ease-out; /* Плавность зума */
+    will-change: transform;
+}
+
+#map-viewport {
+    /* Оставляем как было, но убедись, что overflow: auto; */
+    overflow: scroll; 
+}
+#map-viewport {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* ЭТО СКРЫВАЕТ ПОЛОСЫ ПРОКРУТКИ */
+    background: #000;
+    cursor: grab;
+    position: relative;
+}
+
+#map-canvas {
+    position: absolute; /* ОБЯЗАТЕЛЬНО */
+    top: 0;
+    left: 0;
+    transform-origin: 0 0; /* ОБЯЗАТЕЛЬНО */
+    /* УБЕРИ отсюда transition: transform, если он есть */
+}
+#borders-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Пропускает клики сквозь себя */
+    z-index: 2; /* Выше тумана, но ниже звезд */
+}
+/* Табло координат */
+#coord-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(5, 15, 25, 0.8);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    color: var(--neon-blue, #00e5ff);
+    font-family: 'Orbitron', sans-serif; /* Или любой твой шрифт */
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    pointer-events: none; /* Чтобы не мешало кликать */
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+}
+/* =========================================
+   ИНТЕРФЕЙС: ТАБЛО КООРДИНАТ
+   ========================================= */
+#coord-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(10, 20, 30, 0.85); /* Темно-синий полупрозрачный фон */
+    border: 1px solid rgba(0, 229, 255, 0.4); /* Неоновая рамочка */
+    color: #00e5ff; /* Голубой текст */
+    font-family: 'Orbitron', sans-serif; /* Твой космический шрифт */
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    z-index: 9999; /* Чтобы всегда был поверх карты */
+    pointer-events: none; /* Чтобы табло не перехватывало клики мыши */
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    letter-spacing: 1px;
+}
+/* =========================================
+   ГИГАНТСКИЕ ЗВЕЗДЫ (ЯДРО)
+   ========================================= */
+.giant-star img {
+    width: 150px !important; /* Делаем огромной */
+    height: 150px !important;
+    filter: drop-shadow(0 0 40px rgba(255, 204, 0, 0.9)); /* Мощное желтое свечение */
+}
+
+.giant-star .star-label {
+    font-size: 20px; /* Текст крупнее */
+    color: #ffcc00; 
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #000;
+    margin-top: 10px;
+}
+/* =========================================
+   ГИПЕРКОРИДОРЫ (ЛИНИИ)
+   ========================================= */
+#hyperlanes-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Пропускает клики насквозь */
+    z-index: 5; /* Ниже звезд (10), но выше фона (1) */
+}
+
+/* Главные торговые пути */
+.hyperlane-major {
+    stroke: rgba(0, 229, 255, 0.7); /* Голубой неон */
+    stroke-width: 4;
+    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.9));
+}
+
+/* Обычные маршруты */
+.hyperlane-minor {
+    stroke: rgba(255, 255, 255, 0.3); /* Белый полупрозрачный */
+    stroke-width: 2;
+    stroke-dasharray: 8, 8; /* Делает линию пунктирной */
+}
+
+/* Тайные/Опасные тропы */
+.hyperlane-secret {
+    stroke: rgba(255, 50, 50, 0.5); /* Красный тусклый */
+    stroke-width: 2;
+    stroke-dasharray: 15, 10;
+}
+/* =========================================
+   ГАЛАКТИЧЕСКАЯ БИРЖА
+   ========================================= */
+.exchange-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+}
+
+.exchange-title {
+    text-align: center;
+    color: #00e5ff;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #00e5ff;
+    margin-bottom: 30px;
+}
+
+/* Кнопки-табы */
+.exchange-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid #334;
+    color: #8892b0;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    border-color: #00e5ff;
+    color: #00e5ff;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+/* Сетка карточек */
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.market-card {
+    background: rgba(10, 15, 30, 0.8);
+    border: 1px solid #223;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.market-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffcc00;
+    box-shadow: 0 5px 20px rgba(255, 204, 0, 0.2);
+}
+
+.card-img-box {
+    width: 100%;
+    height: 180px;
+    background: #000;
+    overflow: hidden;
+}
+
+.card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.market-card:hover .card-img-box img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info h3 {
+    margin: 0 0 10px 0;
+    color: #ffcc00;
+    font-size: 18px;
+}
+
+.card-info p {
+    color: #8892b0;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    height: 40px; /* Чтобы все карточки были одной высоты */
+}
+
+.card-price {
+    font-weight: bold;
+    color: #00e5ff;
+    border-top: 1px dashed #334;
+    padding-top: 10px;
+}
+
+/* =========================================
+   МОДАЛЬНОЕ ОКНО (ВСПЛЫВАЮЩЕЕ)
+   ========================================= */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #0a0f1e;
+    border: 2px solid #00e5ff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.close-btn:hover { color: #ff3333; }
+
+.modal-header { position: relative; height: 250px; }
+.modal-header img { width: 100%; height: 100%; object-fit: cover; }
+.modal-header h2 {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    margin: 0; padding: 15px;
+    background: linear-gradient(transparent, #0a0f1e);
+    color: #ffcc00;
+    font-size: 24px;
+    box-sizing: border-box;
+}
+
+.modal-body { padding: 20px; }
+.modal-body h3 { color: #8892b0; margin-top: 0; font-size: 16px; border-bottom: 1px solid #334; padding-bottom: 5px; }
+
+/* Красивое оформление ТТХ */
+.tth-list {
+    list-style: none;
+    padding: 0; margin: 0;
+}
+
+.tth-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #223;
+    font-size: 14px;
+}
+
+.tth-list li strong { color: #00e5ff; font-weight: normal; }
+.tth-list li span { color: #fff; text-align: right; max-width: 60%; }
+
+.modal-footer {
+    padding: 15px 20px;
+    background: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #334;
+}
+
+.license-label { color: #8892b0; font-size: 14px; }
+.license-price { color: #ffcc00; font-size: 20px; font-weight: bold; text-shadow: 0 0 5px #ffcc00; }
+
+.buy-btn {
+    background: #00e5ff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.buy-btn:hover { background: #fff; box-shadow: 0 0 15px #00e5ff; }
+/* =========================================
+   КАРТОЧКИ ПЛАНЕТ В БОКОВОЙ ПАНЕЛИ
+   ========================================= */
+.planet-card {
+    display: flex;
+    align-items: center;
+    background: rgba(10, 15, 30, 0.6);
+    border: 1px solid #223;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.planet-card:hover {
+    background: rgba(20, 30, 50, 0.8);
+    border-color: #00e5ff;
+}
+
+.planet-frame {
+    width: 45px;
+    height: 45px;
+    background: #000;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px;
+    flex-shrink: 0;
+    border: 1px solid #445;
+}
+
+.planet-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* =========================================
+   КРЕСТИК ДЛЯ БОКОВОЙ ПАНЕЛИ КАРТЫ
+   ========================================= */
+#system-info-panel {
+    position: absolute; /* Или fixed, смотря как у тебя было */
+    /* Твои старые стили для панели (фон, отступы и т.д.) остаются нетронутыми */
+}
+
+/* Прицельно настраиваем крестик внутри панели карты */
+#system-info-panel .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #8892b0;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 100; /* Чтобы он всегда был поверх текста */
+    line-height: 1;
+}
+
+#system-info-panel .close-btn:hover {
+    color: #ff3333; /* При наведении становится красным */
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.6);
+}
+/* =========================================
+   СТРАНИЦА: ПЛАНЕТОЛОГИЯ
+   ========================================= */
+
+/* Автоматическая сетка (карточки сами переносятся на новую строку) */
+.planets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Сама карточка */
+.planet-block {
+    background: rgba(10, 15, 30, 0.6);
+    border: 1px solid #223;
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.planet-block:hover {
+    transform: translateY(-8px);
+    border-color: #00e5ff;
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15);
+}
+
+/* Круглая планета с 3D-эффектом */
+.planet-sphere {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%; /* Делает идеальный круг */
+    overflow: hidden;
+    position: relative;
+    /* Внешнее свечение (атмосфера) и легкая рамка */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.1), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* Внутренняя тень, чтобы планета казалась шаром, а не блином */
+.planet-sphere::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    /* Тень падает снизу-справа, создавая объем */
+    box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.8), 
+                inset 10px 10px 20px rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.planet-sphere img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполняет весь круг без искажений */
+    transition: transform 0.5s ease;
+}
+
+/* Легкое увеличение планеты при наведении */
+.planet-block:hover .planet-sphere img {
+    transform: scale(1.05);
+}
+
+/* Тексты */
+.planet-title {
+    color: #ffcc00;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+}
+
+.planet-stats p {
+    margin: 8px 0;
+    color: #fff;
+    font-size: 13px;
+    font-family: monospace; /* Технический шрифт для характеристик */
+}
+
+.planet-stats span {
+    color: #00e5ff;
+}
+/* =========================================
+   КОНСТРУКТОР ЦИВИЛИЗАЦИИ
+   ========================================= */
+
+.civ-constructor {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    border: 1px solid #223;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+    padding: 40px;
+    background: rgba(10, 15, 30, 0.95);
+    border-radius: 8px;
+    color: #8892b0;
+}
+
+.civ-constructor h1 {
+    text-align: center;
+    color: #00e5ff;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #00e5ff, 0 0 20px #007a88;
+    margin-bottom: 40px;
+}
+
+.civ-constructor h3 {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    border-bottom: 1px dashed #007a88;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.civ-constructor .section { margin-bottom: 20px; }
+
+.civ-constructor label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.civ-constructor input[type="text"], 
+.civ-constructor select, 
+.civ-constructor textarea {
+    width: 100%;
+    padding: 12px;
+    background: #050810;
+    border: 1px solid #334;
+    color: white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.civ-constructor input:focus, 
+.civ-constructor select:focus, 
+.civ-constructor textarea:focus { 
+    border-color: #00e5ff; 
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.civ-constructor .points-panel {
+    position: sticky;
+    top: 20px;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid #00e5ff;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 4px;
+    z-index: 100;
+    box-shadow: 0 0 10px #00e5ff, 0 0 20px #007a88;
+    margin-bottom: 30px;
+    backdrop-filter: blur(5px);
+}
+
+.civ-constructor #points-display {
+    color: #ffcc00;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.civ-constructor .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.civ-constructor .building-item {
+    background: rgba(10, 15, 30, 0.8);
+    padding: 10px 15px;
+    border: 1px solid #223;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.civ-constructor .building-item:hover {
+    border-color: #007a88;
+}
+
+.civ-constructor .building-item.locked {
+    border: 1px solid #00e5ff;
+    background: rgba(0, 229, 255, 0.1);
+}
+
+.civ-constructor .controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.civ-constructor button {
+    cursor: pointer;
+    padding: 15px 25px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border: none;
+}
+
+.civ-constructor .btn-gen { 
+    background: #00e5ff; 
+    color: #000; 
+    flex: 2; 
+}
+.civ-constructor .btn-gen:hover {
+    background: #fff;
+    box-shadow: 0 0 15px #00e5ff;
+}
+
+.civ-constructor .btn-copy { 
+    background: transparent; 
+    color: #00e5ff; 
+    border: 1px solid #00e5ff; 
+    flex: 1; 
+}
+.civ-constructor .btn-copy:hover {
+    background: rgba(0, 229, 255, 0.1);
+}
+
+.civ-constructor .result-area {
+    width: 100%;
+    height: 400px;
+    background: #050810;
+    color: #fff;
+    border: 1px dashed #007a88;
+    padding: 20px;
+    margin-top: 25px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    overflow-y: auto;
+    font-size: 0.95em;
+    border-radius: 4px;
+}
+
+.civ-constructor input[type="checkbox"] { 
+    accent-color: #00e5ff; 
+    transform: scale(1.2); 
+    cursor: pointer;
+}
+
+
+/* =========================================
+   КОНСТРУКТОР ДИВИЗИЙ (ПЕХОТА И ТЕХНИКА)
+   ========================================= */
+
+.div-constructor {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    border: 1px solid #223;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+    padding: 40px;
+    background: rgba(10, 15, 30, 0.95);
+    border-radius: 8px;
+    color: #8892b0;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.div-constructor h1 {
+    text-align: center;
+    color: #00e5ff;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #00e5ff, 0 0 20px #007a88;
+    margin-bottom: 30px;
+}
+
+.div-constructor .top-controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    align-items: flex-end;
+}
+
+.div-constructor .input-group {
+    flex: 1;
+}
+
+.div-constructor label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.div-constructor input[type="text"],
+.div-constructor input[type="number"],
+.div-constructor select {
+    width: 100%;
+    padding: 12px;
+    background: #050810;
+    border: 1px solid #334;
+    color: white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.div-constructor input:focus, 
+.div-constructor select:focus { 
+    border-color: #00e5ff; 
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.div-constructor button {
+    cursor: pointer;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border: none;
+}
+
+.div-constructor .btn-add {
+    background: #00e5ff;
+    color: #000;
+    height: 46px; /* Чтобы кнопка была вровень с инпутом */
+}
+
+.div-constructor .btn-add:hover {
+    background: #fff;
+    box-shadow: 0 0 15px #00e5ff;
+}
+
+.div-constructor .equipment-block {
+    display: flex;
+    gap: 15px;
+    background: rgba(10, 15, 30, 0.8);
+    border: 1px solid #223;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.div-constructor .equipment-block:hover {
+    border-color: #007a88;
+}
+
+.div-constructor .equipment-block select { flex: 2; }
+.div-constructor .equipment-block input[type="number"] { flex: 1; text-align: center; }
+.div-constructor .btn-remove { 
+    background: transparent; 
+    color: #ff3333; 
+    border: 1px dashed #ff3333; 
+    padding: 10px 15px;
+}
+.div-constructor .btn-remove:hover { background: rgba(255, 51, 51, 0.1); }
+
+/* Панель итогов */
+.div-constructor .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px dashed #007a88;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+
+.div-constructor .totals-item {
+    background: #050810;
+    padding: 15px;
+    border: 1px solid #334;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.div-constructor .totals-item-title {
+    display: block;
+    color: #8892b0;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.div-constructor .totals-item span:not(.totals-item-title) {
+    color: #ffcc00;
+    font-size: 1.4em;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+}
+
+.div-constructor .warning { color: #ff3333 !important; text-shadow: 0 0 10px rgba(255, 51, 51, 0.5) !important; }
+
+/* Блок результатов */
+.div-constructor .selected-models {
+    margin-top: 30px;
+    padding: 20px;
+    background: #050810;
+    border: 1px solid #334;
+    border-radius: 4px;
+}
+
+.div-constructor .selected-models-title {
+    color: #00e5ff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.div-constructor #displayLegionName {
+    font-size: 1.5em;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.div-constructor .btn-copy {
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    color: #00e5ff;
+    border: 1px solid #00e5ff;
+}
+
+.div-constructor .btn-copy:hover {
+    background: rgba(0, 229, 255, 0.1);
+}
+
+/* =========================================
+   ФРАКЦИИ (РЕЕСТР ГОСУДАРСТВ)
+   ========================================= */
+
+.factions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.faction-card {
+    background: rgba(10, 15, 30, 0.8);
+    border: 1px solid #223;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.faction-card:hover {
+    border-color: #00e5ff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
+}
+
+.faction-heraldry {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.3));
+}
+
+.faction-name {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.faction-short-desc {
+    color: #8892b0;
+    font-size: 0.9em;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Модальное окно фракции */
+.faction-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 15px;
+    color: #e0e0e0;
+    font-family: 'Exo 2', sans-serif;
+    line-height: 1.6;
+}
+
+/* Стилизация скроллбара в модалке */
+.faction-modal-body::-webkit-scrollbar { width: 6px; }
+.faction-modal-body::-webkit-scrollbar-track { background: #050810; }
+.faction-modal-body::-webkit-scrollbar-thumb { background: #00e5ff; border-radius: 3px; }
+
+.f-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    border-bottom: 1px dashed #007a88;
+    padding-bottom: 20px;
+}
+
+.f-modal-heraldry {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.f-modal-title {
+    color: #00e5ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #00e5ff;
+}
+
+.f-section-title {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    margin: 20px 0 10px 0;
+    font-size: 1.1em;
+}
+
+.f-data-row {
+    margin-bottom: 6px;
+}
+
+.f-label {
+    color: #8892b0;
+    font-weight: bold;
+}
+
+.f-value {
+    color: #fff;
+}
+/* =========================================
+   ЛЕТОПИСЬ (ЛОР И СОБЫТИЯ)
+   ========================================= */
+
+/* Главный баннер-вступление */
+.lore-hero {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Займет 60% высоты экрана */
+    min-height: 400px;
+    background-image: url('img/lore_bg.jpg'); /* Замени на свою картинку 1920x780 */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid #00e5ff;
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
+}
+
+/* Затемнение фона, чтобы текст читался */
+.lore-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(10,15,30,0.4), rgba(10,15,30,0.9));
+    z-index: 1;
+}
+
+.lore-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.lore-hero-title {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+.lore-hero-text {
+    color: #e0e0e0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px #000;
+}
+
+/* Сетка карточек событий */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+}
+
+.event-card {
+    background: rgba(10, 15, 30, 0.8);
+    border: 1px solid #223;
+    border-radius: 8px;
+    padding: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card:hover {
+    border-color: #00e5ff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15);
+}
+
+.event-year {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #00e5ff;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 0 10px #00e5ff;
+}
+
+.event-title {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.event-snippet {
+    color: #8892b0;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* Модальное окно события */
+.lore-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 15px;
+    color: #e0e0e0;
+    line-height: 1.7;
+    font-size: 1.05em;
+    text-align: justify;
+}
+
+.lore-modal-body::-webkit-scrollbar { width: 6px; }
+.lore-modal-body::-webkit-scrollbar-track { background: #050810; }
+.lore-modal-body::-webkit-scrollbar-thumb { background: #00e5ff; border-radius: 3px; }
+
+.lm-date {
+    color: #00e5ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.lm-title {
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #007a88;
+    padding-bottom: 10px;
+}
+
+.lm-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #334;
+}
+.lore-hero-content {
+    /* Другие стили для контента */
+    text-align: center; /* Центрируем контент, включая изображение */
+}
+
+.lore-hero-img {
+    max-width: 100%; /* Изображение не будет шире своего контейнера */
+    height: auto; /* Высота будет подстраиваться автоматически, сохраняя пропорции */
+    margin-bottom: 20px; /* Добавляем отступ снизу от изображения */
+    display: block; /* Делаем изображение блочным элементом, чтобы margin работал правильно */
+    margin-left: auto; /* Центрируем изображение горизонтально */
+    margin-right: auto;
+}
+/* АНИМАЦИЯ: Космическая левитация для логотипа */
+@keyframes spaceFloat {
+    0% {
+        transform: translateY(0px);
+        text-shadow: 0 0 5px rgba(255, 204, 0, 0.3); /* Легкое золотое свечение */
+    }
+    50% {
+        transform: translateY(-4px); /* Плавный подъем на 4 пикселя */
+        text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.5); /* Вспышка свечения */
+    }
+    100% {
+        transform: translateY(0px); /* Плавный спуск */
+        text-shadow: 0 0 5px rgba(255, 204, 0, 0.3); /* Возврат к легкому свечению */
+    }
+}
+/* =========================================
+   ГЛОБАЛЬНОЕ ОБНОВЛЕНИЕ ДИЗАЙНА (НЕОНОВОЕ СТЕКЛО)
+   Вставлено в конец файла, чтобы перебить старые стили
+   ========================================= */
+
+:root {
+    --bg-dark: #050810;
+    --cyan: #00e5ff;
+    --cyan-glow: rgba(0, 229, 255, 0.6);
+    --gold: #ffcc00;
+    --gold-glow: rgba(255, 204, 0, 0.6);
+    --text-main: #e0e0e0;
+    --text-muted: #8892b0;
+    --glass-bg: rgba(12, 16, 28, 0.6);
+    --glass-border: rgba(0, 229, 255, 0.15);
+}
+
+body {
+    background: radial-gradient(circle at top center, #111a2e 0%, var(--bg-dark) 100%);
+    color: var(--text-main);
+}
+
+.top-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold-glow);
+    will-change: transform, text-shadow;
+    animation: spaceFloat 3.5s ease-in-out infinite;
+}
+
+.main-nav a:hover, .neon-link {
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--cyan-glow);
+}
+
+/* Перекрашиваем карточки фракций и событий в стекло */
+.faction-card, .event-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Перекрашиваем всплывающее окно досье */
+.modal-box {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Анимация левитации логотипа */
+@keyframes spaceFloat {
+    0% { transform: translate3d(0, 0, 0); text-shadow: 0 0 5px var(--gold-glow); }
+    50% { transform: translate3d(0, -6px, 0); text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold-glow); }
+    100% { transform: translate3d(0, 0, 0); text-shadow: 0 0 5px var(--gold-glow); }
+}
+/* === НОВЫЕ СТИЛИ ДЛЯ БИРЖИ (СПИСОК ПРОДАВЦОВ) === */
+.item-description {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    border-left: 3px solid var(--cyan);
+    padding-left: 15px;
+}
+
+.sellers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.seller-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid var(--gold);
+    border-radius: 6px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller-info strong {
+    color: var(--text-main);
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.seller-info span {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.btn-vk {
+    background: #0077FF; /* Фирменный цвет ВК */
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.3);
+}
+
+.btn-vk:hover {
+    background: #005ce6;
+    box-shadow: 0 0 20px rgba(0, 119, 255, 0.6);
+    transform: translateY(-2px);
+}
+/* =========================================
+   ОБНОВЛЕННОЕ ШИРОКОЕ МОДАЛЬНОЕ ОКНО
+   ========================================= */
+
+/* Сама подложка (оставляем без изменений) */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* !!! КОРПУС ОКНА — ДЕЛАЕМ ШИРЕ И ГЛУБЖЕ !!! */
+.modal-content {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    width: 90%; /* Адаптивность для мобильных */
+    max-width: 850px; /* !!! Новая большая ширина !!! */
+    max-height: 90vh; /* Окно не выше 90% экрана */
+    display: flex;
+    flex-direction: column; /* Шапка-Тело-Футер */
+    overflow: hidden; /* Чтобы скругления не резались */
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.2);
+}
+
+/* Шапка (фиксированная) */
+.modal-header {
+    padding: 20px 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+#modal-title {
+    font-size: 24px;
+    margin: 0;
+}
+
+#modal-class {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* !!! ТЕЛО ОКНА — ДОБАВЛЯЕМ СКРОЛЛ !!! */
+.modal-body {
+    padding: 30px;
+    overflow-y: auto; /* !!! ВКЛЮЧАЕМ ВЕРТИКАЛЬНЫЙ СКРОЛЛ ВНУТРИ !!! */
+    flex-grow: 1; /* Занимает всё свободное место */
+}
+
+/* Стилизация скроллбара (для Chrome/Edge/Safari) */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 4px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+}
+
+/* Футер (фиксированный) */
+.modal-footer {
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 28px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover { color: #fff; }
+
+/* === СТИЛИЗАЦИЯ ПОДРОБНЫХ ТТХ === */
+
+/* Основные параметры (Корпус, Щиты) - делаем в 2 колонки */
+.main-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+.stat-label { color: var(--text-muted); }
+.stat-value { color: var(--text-main); font-weight: bold; }
+
+/* Заголовки категорий (Воружение, Модули) */
+.tth-category-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyan);
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Общие списки */
+.tth-extended-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tth-extended-list li {
+    font-size: 14px;
+    color: var(--text-main);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+}
+
+.tth-extended-list li::before {
+    content: '‣';
+    color: var(--gold);
+    margin-right: 10px;
+    font-size: 18px;
+}
+/* =========================================
+   FAQ (БАЗА ЗНАНИЙ) - АККОРДЕОН
+   ========================================= */
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Расстояние между вопросами */
+}
+
+.faq-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden; /* Чтобы ответ не вылезал за скругленные углы */
+    transition: 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.05);
+}
+
+.faq-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 20px 25px;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.faq-question:hover {
+    color: var(--cyan);
+}
+
+.faq-icon {
+    font-size: 14px;
+    color: var(--cyan);
+    transition: transform 0.4s ease;
+}
+
+/* Стили для спрятанного ответа */
+.faq-answer {
+    max-height: 0;
+    padding: 0 25px;
+    opacity: 0;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    transition: all 0.4s ease-in-out;
+}
+
+.faq-answer p {
+    margin-bottom: 15px;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}
+
+/* АНИМАЦИЯ ПРИ ОТКРЫТИИ (Класс .active добавляется через JS) */
+.faq-item.active .faq-question {
+    color: var(--gold);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(-180deg); /* Стрелочка переворачивается */
+    color: var(--gold);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Достаточно большая высота, чтобы влез любой текст */
+    padding: 20px 25px;
+    opacity: 1;
+}
+/* =========================================
+   ЮРИДИЧЕСКАЯ СТРАНИЦА (ПРАВИЛА И УСТАВ)
+   ========================================= */
+
+/* Шапка документа */
+.legal-header {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(5, 8, 16, 0.8) 100%);
+    border: 1px solid var(--glass-border);
+    border-top: 4px solid var(--gold); /* Золотая полоса для статуса */
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.legal-status {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--gold);
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 8px 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.legal-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-main);
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.legal-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Секции (Главы) */
+.legal-section {
+    margin-bottom: 40px;
+}
+
+.section-heading {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyan);
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.section-note {
+    font-size: 14px;
+    color: var(--gold);
+    background: rgba(255, 215, 0, 0.05);
+    padding: 10px 15px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/* Блоки с правилами */
+.rule-block {
+    display: flex;
+    align-items: flex-start;
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.rule-block:hover {
+    background: rgba(0, 229, 255, 0.02);
+    border-color: rgba(0, 229, 255, 0.2);
+}
+
+.rule-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--cyan);
+    background: rgba(0, 229, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 20px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.rule-text {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.rule-text strong {
+    color: var(--text-main);
+    font-weight: 500;
+}
+/* =========================================
+   РУКОВОДСТВО ЛИДЕРА (ГАЙД ПО ФРАКЦИИ)
+   ========================================= */
+
+/* Сетка для двух скриншотов */
+.guide-screenshots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.screenshot-placeholder img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+
+.screenshot-placeholder img:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 5px 25px rgba(0, 229, 255, 0.2);
+}
+
+/* Кнопки ссылок на правила */
+.guide-quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.05);
+}
+
+.btn-outline:hover {
+    background: rgba(0, 229, 255, 0.1);
+    box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.2);
+    color: #fff;
+}
+
+/* Основной текст гайда */
+.guide-text-content {
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Карточки примеров RP-постов */
+.rp-examples-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.rp-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rp-card-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--cyan);
+    border-left: 4px solid var(--cyan);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.rp-card-body {
+    padding: 20px;
+    color: #c8d1e0; /* Чуть светлее обычного текста для читаемости */
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: 'Exo 2', sans-serif;
+}
+/* Обращаемся к последней карточке, если она нечетная (пятая) */
+.mechanics-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1; /* Растягиваем блок на всю ширину сетки */
+    justify-self: center; /* Выравниваем саму карточку по центру */
+    
+    /* Ограничиваем ширину, чтобы она не растянулась на весь экран.
+       Подставь сюда ширину, которая используется у твоих обычных карточек */
+    width: 100%;
+    max-width: 400px; 
+}
+/* =========================================
+   ЭЛЕМЕНТЫ ИНТЕРФЕЙСА КОНСТРУКТОРОВ
+   ========================================= */
+
+/* Строки добавления модулей и оружия */
+.item-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.item-row select {
+    flex-grow: 1; /* Выпадающий список занимает всё свободное место */
+}
+
+/* Поле ввода количества (x1, x2 и т.д.) */
+.qty-input {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.qty-input:focus {
+    border-color: var(--cyan);
+    outline: none;
+}
+
+/* Кнопка удаления модуля (крестик) */
+.btn-del {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-del:hover {
+    background: #ff4d4d;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+/* =========================================
+   ВИЗУАЛЬНАЯ СХЕМА (SVG ЧЕРТЕЖИ)
+   ========================================= */
+.blueprint-panel {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
+}
+
+.blueprint-svg {
+    width: 100%;
+    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
+}
+
+/* Базовое состояние детали (выключено) */
+.ship-part {
+    fill: rgba(0, 229, 255, 0.05);
+    stroke: rgba(0, 229, 255, 0.3);
+    stroke-width: 2;
+    transition: all 0.4s ease;
+}
+
+/* Активное состояние детали (когда установлен модуль) */
+.active-part {
+    fill: rgba(0, 229, 255, 0.2);
+    stroke: var(--cyan);
+    filter: drop-shadow(0 0 8px var(--cyan));
+}
+
+/* Анимация появления энергощита */
+#svg-shields {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* =========================================
+   ИДЕАЛЬНАЯ АДАПТАЦИЯ (СМАРТФОНЫ)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* 1. Глобальный предохранитель: запрещаем всему вылезать за края */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. Жестко фиксируем ширину экрана (без 100vw) */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 3. Шапка и навигация */
+    .top-header, header {
+        flex-direction: column !important;
+        padding: 15px 10px !important;
+        text-align: center !important;
+    }
+    .main-nav, header .nav {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 8px !important;
+        margin-top: 10px !important;
+        padding: 0 !important;
+    }
+    .main-nav a, header .nav a {
+        display: block !important;
+        width: 100% !important;
+        padding: 10px 0 !important;
+    }
+
+    /* 4. Конструктор: превращаем сетки в одну колонку */
+    .wrapper, .builder-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 10px !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    .sidebar {
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--glass-border) !important;
+        padding-bottom: 15px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* 5. Панели и внутренние меню (Реакторы, броня и т.д.) */
+    .panel {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px 10px !important;
+    }
+    
+    .panel div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* 6. Фикс полей ввода (чтобы они не распирали блоки) */
+    input, select, textarea {
+        width: 100% !important;
+    }
+    .qty-input {
+        width: 60px !important; /* Кнопка количества (x1, x2) остается маленькой */
+    }
+
+    /* 7. Адаптация графики */
+    img, svg, .blueprint-svg {
+        width: 100% !important;
+        height: auto !important;
+    }
+/* =========================================
+       8. АККУРАТНЫЕ ФИКСЫ (МЕХАНИКИ, КНОПКИ, СПРАВОЧНИК)
+       ========================================= */
+       
+    /* 1. Безопасное складывание сеток (Механики и Справочник) */
+    .mechanics-grid, 
+    .guide-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+
+    /* 2. Карточки на 100% ширины (чтобы не пропадали блоки) */
+    .mechanics-card, 
+    .veteran-card, 
+    .panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 15px 0 !important;
+        box-sizing: border-box !important;
+        display: block !important; /* Гарантирует видимость всех блоков */
+    }
+
+    /* 3. Фикс длинных кнопок */
+    .btn {
+        white-space: normal !important; 
+        height: auto !important;
+        padding: 12px 10px !important;
+        width: 100% !important;
+    }
+
+    /* 4. Точечный фикс бокового меню (без вреда для главной страницы) */
+    .wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}

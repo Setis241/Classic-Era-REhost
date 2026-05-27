@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научный Терминал | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <main class="content" style="max-width: 100%;">
+            <h1 class="gold-title" style="text-align: center;">НАУЧНЫЙ ТЕРМИНАЛ</h1>
+            <p style="text-align: center; color: #8892b0;">Прогрессия технологий и государственных реформ в 3355 году.</p>
+
+            <div class="tech-tree-container">
+                
+                <div class="tech-branch">
+                    <h2>ГОСУДАРСТВО</h2>
+                    <div class="tech-node tier-1" onclick="openTech('Основание', '10 ОН', 'Базовые принципы формирования государственности и объединения первых колонистов.')">
+                        Основание <span class="cost-tag">10 ОН</span>
+                    </div>
+                    <div class="tech-node tier-1" onclick="openTech('Админ. деление', '10 ОН', 'Организация структуры управления сектором и распределение полномочий.')">
+                        Админ. деление <span class="cost-tag">10 ОН</span>
+                    </div>
+                    <div class="tech-node tier-1" onclick="openTech('Упр. персоналом', '10 ОН', 'Система подготовки кадров для гражданской и военной службы.')">
+                        Упр. персоналом <span class="cost-tag">10 ОН</span>
+                    </div>
+                    <div class="tech-node tier-1" onclick="openTech('Политика партии', '10 ОН', 'Формирование единого идеологического вектора развития фракции.')">
+                        Политика партии <span class="cost-tag">10 ОН</span>
+                    </div>
+                    <div class="tech-node tier-1" onclick="openTech('Дипл. усилия', '10 ОН', 'Методы ведения переговоров и установление первых межзвездных контактов.')">
+                        Дипл. усилия <span class="cost-tag">10 ОН</span>
+                    </div>
+                    <div class="tech-node tier-2" onclick="openTech('Центр. реестр', '20 ОН', 'Цифровая база данных ресурсов и населения для контроля экономики.')">
+                        Центр. реестр <span class="cost-tag">20 ОН</span>
+                    </div>
+                    <div class="tech-node tier-2" onclick="openTech('Мин. Пропаганды', '20 ОН', 'Система контроля информации и настроения масс.')">Мин. Пропаганды <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Межзв. таможня', '20 ОН', 'Контроль торговых путей и пошлин.')">Межзв. таможня <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Корп. право', '20 ОН', 'Регулирование частных инициатив в строительстве.')">Корп. право <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Развед. управл.', '20 ОН', 'Протоколы ведения тайных приказов.')">Развед. управл. <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Инст. идеологии', '30 ОН', 'Высшая школа формирования ценностей фракции.')">Инст. идеологии <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Внеш. интеграция', '30 ОН', 'Ускорение инкорпорации захваченных миров.')">Внеш. интеграция <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Гал. Кодекс', '30 ОН', 'Доминирование в юридическом поле Галактики.')">Гал.Кодекс <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Трансп. коридоры', '30 ОН', 'Оптимизация логистики в удаленных системах.')">Трансп. коридоры <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Абсолютизм', '30 ОН', 'Максимальная концентрация власти в руках ГА.')">Абсолютизм <span class="cost-tag">30 ОН</span></div>
+                </div>
+
+                <div class="tech-branch">
+                    <h2>ПЛАНЕТОЛОГИЯ</h2>
+                    <div class="tech-node tier-1" onclick="openTech('Экперт колонизации', '10 ОН', 'Оптимизация процесса высадки и первичного обустройства.')">Эксперт колонизации <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Упр. населением', '10 ОН', 'Программы распределения жителей по секторам.')">Упр. населением <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Баз. Терраформ.', '10 ОН', 'Первичная реструктуризация климатических условий.')">Баз. Терраформ. <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Добыча металлов', '10 ОН', 'Технологии извлечения ценных ресурсов из недр.')">Добыча металлов <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Экуменополис', '10 ОН', 'Проект превращения всей поверхности планеты в город.')">Экуменополис <span class="cost-tag">10 ОН</span></div>
+                    
+                    <div class="tech-node tier-2" onclick="openTech('Глуб. бурение', '20 ОН', 'Доступ к заблокированным ячейкам на скалистых мирах.')">Глуб. бурение <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Агро-комплексы', '20 ОН', 'Максимальная эффективность на Террах.')">Агро-комплексы <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Атм. фильтры', '20 ОН', 'Снижение рисков на токсичных планетах.')">Атм. фильтры <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Орб. лифты', '20 ОН', 'Повышение промышленного потенциала планеты.')">Орб. лифты <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Продв. Терраформ.', '20 ОН', 'Ускорение работ по изменению климата.')">Продв. Терраформ. <span class="cost-tag">20 ОН</span></div>
+                    
+                    <div class="tech-node tier-3" onclick="openTech('Геотермальная эн.', '30 ОН', 'Бонус к доходу с вулканических миров.')">Геотермальная эн. <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Купольные пос.', '30 ОН', 'Возможность застройки газовых гигантов.')">Купольные пос. <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Мелиорация', '30 ОН', 'Увеличение ячеек на пустынных мирах.')">Мелиорация <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Биосферное мод.', '30 ОН', 'Повышение рождаемости и выживаемости.')">Биосферное мод. <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Технология Гайя', '30 ОН', 'Финальный этап - превращение в идеальный мир.')">Технология Гайя <span class="cost-tag">30 ОН</span></div>
+                </div>
+
+                <div class="tech-branch">
+                    <h2>ОБОРОНА</h2>
+                    <div class="tech-node tier-1" onclick="openTech('Возрождение', '10 ОН', 'Базовая подготовка и экипировка солдат.')">Возрождение <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Акцент: Космос', '10 ОН', 'Преимущество в орбитальных маневрах флота.')">Акцент: Космос <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Акцент: Поверхность', '10 ОН', 'Улучшение тактики наземного десанта.')">Акцент: Поверхность <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Создание машин', '10 ОН', 'Производство автоматизированной боевой техники.')">Создание машин <span class="cost-tag">10 ОН</span></div>
+                    <div class="tech-node tier-1" onclick="openTech('Крейсер', '10 ОН', 'Чертеж среднего класса боевого судна.')">Крейсер <span class="cost-tag">10 ОН</span></div>
+
+                    <div class="tech-node tier-2" onclick="openTech('Орб. крепости', '20 ОН', 'Стационарные платформы защиты системы.')">Орб. крепости <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Грав. ингибиторы', '20 ОН', 'Мощные колодцы для блокировки гипер-прыжков.')">Грав. ингибиторы <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Мобильные корпуса', '20 ОН', 'Тактика быстрых атак и прорывов.')">Мобильные корпуса <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Системы ПВО/ПКО', '20 ОН', 'Средства отражения орбитальных бомбардировок.')">Системы ПВО/ПКО <span class="cost-tag">20 ОН</span></div>
+                    <div class="tech-node tier-2" onclick="openTech('Линкор', '20 ОН', 'Чертеж тяжелого линейного корабля.')">Линкор <span class="cost-tag">20 ОН</span></div>
+
+                    <div class="tech-node tier-3" onclick="openTech('Стелс-покрытия', '30 ОН', 'Снижение заметности малых судов.')">Стелс-покрытия <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Штурм. авиация', '30 ОН', 'Поддержка войск с воздуха в атмосфере.')">Штурм. авиация <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Арт. сверхдальняя', '30 ОН', 'Превосходство в дальности поражения целей.')">Арт. сверхдальняя <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Автомат. флот', '30 ОН', 'Беспилотные системы управления кораблями.')">Автомат. флот <span class="cost-tag">30 ОН</span></div>
+                    <div class="tech-node tier-3" onclick="openTech('Флагман', '30 ОН', 'Уникальный сверхтяжелый проект для лидера фракции.')">Флагман <span class="cost-tag">30 ОН</span></div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="tech-modal" class="modal-overlay" onclick="closeTech()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeTech()">×</span>
+            <h2 id="tech-name" class="gold-title" style="border:none;">Название</h2>
+            <div id="tech-cost" class="op-badge" style="margin-bottom: 20px;">0 ОН</div>
+            <div id="tech-desc" class="desc-text" style="text-align: left;">Описание технологии...</div>
+        </div>
+    </div>
+
+    <script>
+        function openTech(name, cost, desc) {
+            document.getElementById('tech-name').innerText = name;
+            document.getElementById('tech-cost').innerText = cost;
+            document.getElementById('tech-desc').innerText = desc;
+            document.getElementById('tech-modal').style.display = 'flex';
+        }
+        function closeTech() {
+            document.getElementById('tech-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

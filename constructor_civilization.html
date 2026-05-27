@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор цивилизации | Классическая Эра</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Управление</h3>
+            <ul>
+                <li><a href="constructors_hub.html">← Назад к конструкторам</a></li>
+            </ul>
+        </aside>
+<div class="civ-constructor">
+    <h1>Конструктор Цивилизации</h1>
+
+    <div class="points-panel">
+        ДОСТУПНО ОЧКОВ СТРОИТЕЛЬСТВА: <span id="points-display">20</span>
+    </div>
+
+    <h3>I. Политические сведения</h3>
+    <div class="section">
+        <label>1. Полное название фракции</label>
+        <input type="text" id="f-name" placeholder="Пример: Объединенные Земные Нации">
+    </div>
+    <div class="grid-2">
+        <div class="section">
+            <label>2. Форма правления</label>
+            <select id="f-gov">
+                <option>Республика</option>
+                <option>Монархия</option>
+                <option>Империя</option>
+                <option>Олигархия</option>
+                <option>Диктатура</option>
+                <option>Теократия</option>
+                <option>Технократия</option>
+                <option>Корпоратократия</option>
+                <option>Коллективный разум</option>
+                <option>Машинный разум (ИИ)</option>
+            </select>
+        </div>
+        <div class="section">
+            <label>3. Политический режим</label>
+            <select id="f-regime">
+                <option>Демократический</option>
+                <option>Эгалитарный</option>
+                <option>Меритократический</option>
+                <option>Плутократический</option>
+                <option>Олигархический</option>
+                <option>Авторитарный</option>
+                <option>Тоталитарный</option>
+                <option>Деспотичный</option>
+                <option>Анархический</option>
+            </select>
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="section">
+            <label>4. Глава фракции</label>
+            <input type="text" id="f-leader" placeholder="Имя и титул (например: Канцлер Валорис)">
+        </div>
+        <div class="section">
+            <label>5. Тип цивилизации</label>
+            <select id="f-type" onchange="resetBuildings()">
+                <option value="frontier">Зарождающийся фронтир</option>
+                <option value="colony">Самостоятельная колония</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>II. Общие сведения</h3>
+    <div class="grid-2">
+        <div class="section">
+            <label>Название системы</label>
+            <input type="text" id="s-system" placeholder="Система">
+        </div>
+        <div class="section">
+            <label>Название планеты</label>
+            <input type="text" id="s-planet" placeholder="Планета">
+        </div>
+    </div>
+    <div class="section">
+        <label>Расположение на карте (координаты)</label>
+        <input type="text" id="s-coords" placeholder="Пример: X-24, Y-10">
+    </div>
+
+    <label>Стартовые бонусы (Магазин построек)</label>
+    <div id="buildings-grid" class="grid-2">
+        </div>
+
+    <div class="building-item" style="margin-top:10px;">
+        <span style="color: #ffcc00;">+ 500 галактических стандартов (10 очков)</span>
+        <input type="checkbox" id="bonus-money" onchange="updatePoints()">
+    </div>
+
+    <h3>III. Культурные сведения</h3>
+    <div class="grid-2">
+        <div class="section">
+            <label>1. Биологический вид (Раса)</label>
+            <select id="c-race">
+                <option>Гуманоиды</option>
+                <option>Млекопитающие</option>
+                <option>Рептилоиды</option>
+                <option>Авианы (Птицеподобные)</option>
+                <option>Инсектоиды (Насекомоподобные)</option>
+                <option>Акватики (Водные)</option>
+                <option>Плантоиды (Растениевидные)</option>
+                <option>Литоиды (Каменные)</option>
+                <option>Синтетики / Киборги</option>
+                <option>Энергетические сущности</option>
+            </select>
+        </div>
+        <div class="section">
+            <label>2. Идеология / Этика</label>
+            <select id="c-ideo">
+                <option>Технократия (Культ науки)</option>
+                <option>Милитаризм (Культ силы)</option>
+                <option>Пацифизм (Миролюбие)</option>
+                <option>Экспансионизм (Расширение границ)</option>
+                <option>Изоляционизм (Закрытость)</option>
+                <option>Ксенофилия (Союз с чужаками)</option>
+                <option>Ксенофобия (Превосходство своей расы)</option>
+                <option>Спиритуализм (Вера и религия)</option>
+                <option>Трансгуманизм (Улучшение тела)</option>
+                <option>Экоцентризм (Гармония с природой)</option>
+                <option>Индустриализм (Производство превыше всего)</option>
+            </select>
+        </div>
+    </div>
+    <div class="section">
+        <label>3. Культурные особенности</label>
+        <textarea id="c-features" rows="3" placeholder="Опишите традиции, менталитет, особенности быта..."></textarea>
+    </div>
+
+    <h3>IV. Исторические сведения</h3>
+    <div class="section">
+        <label>Ссылка на фракцию</label>
+        <input type="text" id="h-link" placeholder="URL вашей группы/статьи">
+    </div>
+
+    <div class="controls">
+        <button class="btn-gen" onclick="generate()">Сформировать анкету</button>
+        <button class="btn-copy" id="copy-btn" onclick="copy()">Скопировать</button>
+    </div>
+
+    <div id="output" class="result-area">Заполните поля и нажмите "Сформировать"...</div>
+</div>
+
+<script>
+    const buildings = [
+        { id: 'encom', name: 'Гражданская фабрика', price: 5 },
+        { id: 'ind', name: 'Добывающий завод', price: 5 },
+        { id: 'unit', name: 'Торговый хаб', price: 5 },
+        { id: 'sci', name: 'Научный Институт', price: 10 },
+        { id: 'emb', name: 'Центр Подготовки', price: 5 },
+        { id: 'com', name: 'Центр Спецслужб', price: 5 },
+        { id: 'yard', name: 'Военный Завод', price: 10 },
+        { id: 'mil', name: 'Корабельная Верфь', price: 10 }
+    ];
+
+    function resetBuildings() {
+        const grid = document.getElementById('buildings-grid');
+        const type = document.getElementById('f-type').value;
+        grid.innerHTML = '';
+
+        buildings.forEach(b => {
+            const isFree = (type === 'frontier' && b.id === 'com') || (type === 'colony' && b.id === 'encom');
+            grid.innerHTML += `
+                <div class="building-item ${isFree ? 'locked' : ''}">
+                    <span style="font-size:0.85em; color: #fff;">${b.name} <span style="color: ${isFree ? '#00e5ff' : '#8892b0'};">${isFree ? '(БЕСПЛАТНО)' : '('+b.price+')'}</span></span>
+                    <input type="checkbox" class="b-check" data-name="${b.name}" data-price="${b.price}" 
+                    ${isFree ? 'checked disabled' : ''} onchange="updatePoints()">
+                </div>
+            `;
+        });
+        updatePoints();
+    }
+
+    function updatePoints() {
+        let spent = 0;
+        document.querySelectorAll('.b-check:checked:not(:disabled)').forEach(c => spent += parseInt(c.dataset.price));
+        if(document.getElementById('bonus-money').checked) spent += 10;
+        
+        if(spent > 20) {
+            alert("Превышен лимит очков строительства!");
+            event.target.checked = false;
+            updatePoints();
+            return;
+        }
+        document.getElementById('points-display').innerText = 20 - spent;
+    }
+
+    function generate() {
+        const name = document.getElementById('f-name').value || "[БЕЗ НАЗВАНИЯ]";
+        const typeValue = document.getElementById('f-type').value;
+        const typeLabel = typeValue === 'frontier' ? "Зарождающийся фронтир" : "Самостоятельная колония";
+        
+        const bList = [];
+        document.querySelectorAll('.b-check:checked').forEach(c => bList.push(c.dataset.name));
+        
+        const money = document.getElementById('bonus-money').checked ? "500 галактических стандартов" : "Стартовый капитал (стандарт)";
+
+        let history = "";
+        if(typeValue === 'frontier') {
+            history = `Частные корпорации подписали договор о создании Межзвездного Фонда Исследований и Колонизации (МФИК), который спонсировал первую колониальную группу и зародил фронтир под названием ${name}, в надежде обрести новый дом для цивилизаций. В бескрайнем космосе всё еще существуют дикие, неисследованные земли, которые требуют тщательного исследования, а отсутствие безопасности в пространстве из-за неизвестного ужаса космоса, рождает в себе только надежду с помощью фронтиров наладить торговлю, исследования и безопасность.`;
+        } else {
+            history = `Бескрайние просторы Даллерии возродили новую нацию путем перезапуска эволюции. Первый выход в космос позволил наконец-то восоздать новые технологии при исследовании. Еще не зная, а лишь догадываясь о других формах жизни, новое планетарное государство идет вперед, чтобы исследовать космическую пустош.`;
+        }
+
+        const res = `I. ПОЛИТИЧЕСКИЕ СВЕДЕНИЯ
+1. Полное название фракции: ${name}
+2. Формы государственного правления и устройства: ${document.getElementById('f-gov').value}
+3. Политический режим: ${document.getElementById('f-regime').value}
+4. Глава фракции: ${document.getElementById('f-leader').value}
+5. Тип цивилизации: ${typeLabel}
+
+II. ОБЩИЕ СВЕДЕНИЯ
+1. Названия столичной системы и одной планеты:
+◘ название системы: ${document.getElementById('s-system').value}
+ㅤㅤㅤ– название планеты: ${document.getElementById('s-planet').value}
+2. Расположение на карте: ${document.getElementById('s-coords').value}
+3. Стартовые бонусы:
+1) Список стартовых построек: ${bList.length > 0 ? bList.join(', ') : 'Нет'}
+2) Стартовые финансы: ${money}
+
+III. КУЛЬТУРНЫЕ СВЕДЕНИЯ
+1. Биологический вид (Раса): ${document.getElementById('c-race').value}
+2. Идеология / Этика: ${document.getElementById('c-ideo').value}
+3. Культурные особенности: ${document.getElementById('c-features').value}
+
+IV. ИСТОРИЧЕСКИЕ СВЕДЕНИЯ
+1. Краткая история: ${history}
+2. Ссылка на фракцию: ${document.getElementById('h-link').value}
+3. Геральдика фракции: [ПРИКРЕПЛЕНО ФОТО]`;
+
+        document.getElementById('output').innerText = res;
+    }
+
+    async function copy() {
+        const text = document.getElementById('output').innerText;
+        await navigator.clipboard.writeText(text);
+        const btn = document.getElementById('copy-btn');
+        btn.innerText = "СКОПИРОВАНО!";
+        setTimeout(() => btn.innerText = "СКОПИРОВАТЬ", 1500);
+    }
+
+    resetBuildings();
+</script>

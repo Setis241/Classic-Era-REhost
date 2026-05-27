@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор Армий | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+        <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Управление</h3>
+            <ul>
+                <li><a href="constructors_hub.html">← Назад к конструкторам</a></li>
+            </ul>
+        </aside>
+
+    <div class="div-constructor">
+        <h1>Конструктор Дивизий</h1>
+
+        <div class="top-controls">
+            <div class="input-group">
+                <label for="legionName">Название легиона/дивизии:</label>
+                <input type="text" id="legionName" placeholder="Например: 1-я Штурмовая Бригада">
+            </div>
+            <button id="addBlock" class="btn-add">+ Добавить отряд</button>
+        </div>
+
+        <div id="constructor-area"></div>
+
+        <div class="totals">
+            <div class="totals-item">
+                <span class="totals-item-title">Общая стоимость (ГС):</span>
+                <span id="totalCost">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Размер дивизии:</span>
+                <span id="totalSize">0</span> <span style="font-size: 12px; color: #8892b0;"> / 10000</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Занято места:</span>
+                <span id="divisionPercent">0</span> <span style="font-size: 12px; color: #8892b0;">%</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Среднее бронирование:</span>
+                <span id="midarmorhp">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Макс. бронирование:</span>
+                <span id="maxarmorhp">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Средняя атака:</span>
+                <span id="midatack">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Макс. атака:</span>
+                <span id="maxatack">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Средняя дальность:</span>
+                <span id="middalnost">0</span>
+            </div>
+            <div class="totals-item">
+                <span class="totals-item-title">Макс. дальность:</span>
+                <span id="maxdalnost">0</span>
+            </div>
+        </div>
+
+        <div class="selected-models">
+            <div class="selected-models-title">Резюме формирования:</div>
+            <div id="displayLegionName">[Без названия]</div>
+            <div class="selected-models-title">Состав:</div>
+            <div id="selectedModels" style="color: #fff; line-height: 1.6;">Пусто</div>
+        </div>
+        
+        <button id="copyToClipboard" class="btn-copy">📋 Скопировать анкету легиона</button>
+    </div>
+
+    <template id="equipmentTemplate">
+        <div class="equipment-block">
+            <select class="equipment-type">
+                <option value="none" selected disabled>Выбрать тип войск</option>
+                <option value="inf">Пехота</option>
+                <option value="tank">Танки</option>
+                <option value="btr">БТР / БМП</option>
+                <option value="artillery">Артиллерия</option>
+                <option value="aviation">Авиация</option>
+            </select>
+            <select class="equipment-model">
+                <option value="none">Сначала выберите тип</option>
+            </select>
+            <input type="number" class="model-count" value="1" min="1" title="Количество">
+            <button class="btn-remove">Удалить</button>
+        </div>
+    </template>
+
+    <script>
+        // БАЗОВАЯ (СТАНДАРТНАЯ) ТЕХНИКА ДЛЯ ФОРМИРОВАНИЯ ДИВИЗИЙ
+        // Сюда в будущем можно будет вписывать уникальные технологии игроков
+        const equipmentData = [
+            // --- ПЕХОТА ---
+            { id: 'inf_militia', name: 'Ополчение', type: 'inf', cost: 10, count: 1000, size: 1000, armorhp: 1, atack: 1, dalnost: 1 },
+            { id: 'inf_regular', name: 'Регулярная пехота', type: 'inf', cost: 35, count: 1000, size: 1000, armorhp: 2, atack: 3, dalnost: 2 },
+            { id: 'inf_heavy', name: 'Тяжелая/Штурмовая пехота', type: 'inf', cost: 80, count: 1000, size: 1000, armorhp: 5, atack: 6, dalnost: 2 },
+            { id: 'inf_spec', name: 'Спецназ / Десант', type: 'inf', cost: 150, count: 1000, size: 1000, armorhp: 4, atack: 10, dalnost: 3 },
+            { id: 'inf_robot', name: 'Роботизированная пехота', type: 'inf', cost: 50, count: 1000, size: 1000, armorhp: 4, atack: 10, dalnost: 3 },
+            
+            // --- ТАНКИ ---
+            { id: 'tank_light', name: 'Легкий танк', type: 'tank', cost: 300, count: 100, size: 200, armorhp: 30, atack: 25, dalnost: 4 },
+            { id: 'tank_mbt', name: 'Основной Боевой Танк', type: 'tank', cost: 500, count: 100, size: 300, armorhp: 80, atack: 70, dalnost: 5 },
+            { id: 'tank_heavy', name: 'Тяжелый танк прорыва', type: 'tank', cost: 1000, count: 100, size: 400, armorhp: 150, atack: 110, dalnost: 5 },
+            { id: 'tank_walker', name: 'Штурмовой Шагоход', type: 'tank', cost: 1500, count: 100, size: 400, armorhp: 120, atack: 140, dalnost: 6 },
+            
+            // --- БТР / БМП ---
+            { id: 'btr_wheel', name: 'Колесный бронетранспортер', type: 'btr', cost: 250, count: 100, size: 150, armorhp: 15, atack: 10, dalnost: 2 },
+            { id: 'bmp_track', name: 'Гусеничная БМП', type: 'btr', cost: 450, count: 100, size: 200, armorhp: 35, atack: 25, dalnost: 3 },
+            { id: 'btr_hover', name: 'Грави-транспорт', type: 'btr', cost: 800, count: 100, size: 150, armorhp: 25, atack: 15, dalnost: 3 },
+
+            // --- АРТИЛЛЕРИЯ ---
+            { id: 'art_mortar', name: 'Мобильная минометная батарея', type: 'artillery', cost: 200, count: 100, size: 100, armorhp: 5, atack: 40, dalnost: 15 },
+            { id: 'art_sau', name: 'Самоходная артустановка', type: 'artillery', cost: 900, count: 100, size: 250, armorhp: 20, atack: 90, dalnost: 40 },
+            { id: 'art_rszo', name: 'РСЗО', type: 'artillery', cost: 1200, count: 100, size: 300, armorhp: 15, atack: 150, dalnost: 60 },
+            { id: 'art_laser', name: 'Тяжелое плазменное/лазерное орудие', type: 'artillery', cost: 3500, count: 100, size: 350, armorhp: 30, atack: 250, dalnost: 80 },
+
+            // --- АВИАЦИЯ (АТМОСФЕРНАЯ) ---
+            { id: 'air_drone', name: 'Ударный беспилотник', type: 'aviation', cost: 500, count: 10, size: 10, armorhp: 2, atack: 40, dalnost: 50 },
+            { id: 'air_heli', name: 'Штурмовой ганшип', type: 'aviation', cost: 1500, count: 10, size: 20, armorhp: 15, atack: 100, dalnost: 30 },
+            { id: 'air_fighter', name: 'Атмосферный истребитель', type: 'aviation', cost: 2000, count: 10, size: 20, armorhp: 10, atack: 150, dalnost: 150 },
+            { id: 'air_bomber', name: 'Тяжелый тактический бомбардировщик', type: 'aviation', cost: 2500, count: 10, size: 40, armorhp: 25, atack: 400, dalnost: 200 }
+        ];
+
+        document.getElementById('legionName').addEventListener('input', function () {
+            document.getElementById('displayLegionName').textContent = this.value || '[Без названия]';
+        });
+
+        document.getElementById('addBlock').addEventListener('click', function () {
+            const newBlock = document.importNode(document.getElementById('equipmentTemplate').content, true);
+            document.getElementById('constructor-area').appendChild(newBlock);
+            updateTotals();
+        });
+
+        document.getElementById('constructor-area').addEventListener('change', function (e) {
+            if (e.target.classList.contains('equipment-type')) {
+                const type = e.target.value;
+                const modelSelect = e.target.parentElement.querySelector('.equipment-model');
+                
+                modelSelect.innerHTML = ''; 
+                const models = equipmentData.filter(item => item.type === type);
+                
+                if (models.length === 0) {
+                    modelSelect.innerHTML = '<option value="none">Нет доступных моделей</option>';
+                } else {
+                    models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model.id;
+                        option.textContent = model.name;
+                        modelSelect.appendChild(option);
+                    });
+                }
+            }
+            updateTotals();
+        });
+
+        document.getElementById('constructor-area').addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-remove')) {
+                e.target.parentElement.remove();
+                updateTotals();
+            }
+        });
+
+        function updateTotals() {
+            const blocks = document.querySelectorAll('.equipment-block');
+            
+            let totalCost = 0, totalSize = 0, count = 0;
+            let midarmorhp = 0, midatack = 0, middalnost = 0;
+            let maxarmorhp = 0, maxatack = 0, maxdalnost = 0;
+            let modelsList = [];
+
+            blocks.forEach(block => {
+                const selectedModel = block.querySelector('.equipment-model').value;
+                const modelCount = parseInt(block.querySelector('.model-count').value) || 0;
+                const model = equipmentData.find(item => item.id === selectedModel);
+                
+                if (model && modelCount > 0) {
+                    modelsList.push(`• ${model.name} (${modelCount} ед.)`);
+                    totalCost += model.cost * modelCount;
+                    totalSize += model.size * modelCount;
+                    
+                    midarmorhp += (model.armorhp || 0) * modelCount;
+                    midatack += (model.atack || 0) * modelCount;
+                    middalnost += (model.dalnost || 0) * modelCount;
+                    count += modelCount;
+
+                    if ((model.armorhp || 0) > maxarmorhp) maxarmorhp = model.armorhp;
+                    if ((model.atack || 0) > maxatack) maxatack = model.atack;
+                    if ((model.dalnost || 0) > maxdalnost) maxdalnost = model.dalnost;
+                }
+            });
+
+            const divisionPercent = (totalSize / 10000) * 100;
+
+            document.getElementById('selectedModels').innerHTML = modelsList.length > 0 ? modelsList.join('<br>') : 'Пусто';
+            document.getElementById('totalCost').innerText = totalCost.toLocaleString('ru-RU');
+            document.getElementById('totalSize').innerText = totalSize.toLocaleString('ru-RU');
+            document.getElementById('midarmorhp').innerText = (count ? (midarmorhp / count).toFixed(1) : 0).toLocaleString('ru-RU');
+            document.getElementById('maxarmorhp').innerText = maxarmorhp.toLocaleString('ru-RU');
+            document.getElementById('midatack').innerText = (count ? (midatack / count).toFixed(1) : 0).toLocaleString('ru-RU');
+            document.getElementById('maxatack').innerText = maxatack.toLocaleString('ru-RU');
+            document.getElementById('middalnost').innerText = (count ? (middalnost / count).toFixed(1) : 0).toLocaleString('ru-RU');
+            document.getElementById('maxdalnost').innerText = maxdalnost.toLocaleString('ru-RU');
+            document.getElementById('divisionPercent').innerText = divisionPercent.toFixed(1);
+
+            const totalSizeElement = document.getElementById('totalSize');
+            if (totalSize > 10000) {
+                totalSizeElement.classList.add('warning');
+                document.getElementById('divisionPercent').classList.add('warning');
+            } else {
+                totalSizeElement.classList.remove('warning');
+                document.getElementById('divisionPercent').classList.remove('warning');
+            }
+        }
+
+        document.getElementById('copyToClipboard').addEventListener('click', function () {
+            const legionName = document.getElementById('legionName').value || '[Без названия]';
+            const models = document.getElementById('selectedModels').innerText;
+            
+            const clipboardData = `=== СВОДКА ДИВИЗИИ ===\n` +
+                `1. Название: ${legionName}\n` +
+                `2. Выбранные модели:\n${models}\n` +
+                `------------------------\n` +
+                `3. Общая стоимость: ${document.getElementById('totalCost').innerText} кр.\n` +
+                `4. Размер: ${document.getElementById('totalSize').innerText} / 10000 (${document.getElementById('divisionPercent').innerText}%)\n` +
+                `5. Бронирование (Ср / Макс): ${document.getElementById('midarmorhp').innerText} / ${document.getElementById('maxarmorhp').innerText}\n` +
+                `6. Атака (Ср / Макс): ${document.getElementById('midatack').innerText} / ${document.getElementById('maxatack').innerText}\n` +
+                `7. Дальность (Ср / Макс): ${document.getElementById('middalnost').innerText} / ${document.getElementById('maxdalnost').innerText}`;
+
+            navigator.clipboard.writeText(clipboardData).then(() => {
+                const btn = document.getElementById('copyToClipboard');
+                const originalText = btn.innerText;
+                btn.innerText = "✓ СКОПИРОВАНО!";
+                btn.style.color = "#ffcc00";
+                btn.style.borderColor = "#ffcc00";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.color = "";
+                    btn.style.borderColor = "";
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

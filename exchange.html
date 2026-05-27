@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Региональная Биржа | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+<div class="wrapper">
+        <aside class="sidebar">
+            <h3>Региональная биржа</h3>
+            <ul>
+                <li><a href="index.html">← К главной странице</a></li>
+            </ul>
+        </aside>
+
+<div class="exchange-wrapper">
+    <h1 class="exchange-title">РЕГИОНАЛЬНАЯ БИРЖА</h1>
+    
+    <div class="exchange-tabs">
+        <button class="tab-btn active" onclick="filterMarket('ships')">Корабли и Авиация</button>
+        <button class="tab-btn" onclick="filterMarket('army')">Наземная техника</button>
+    </div>
+
+    <div class="market-grid" id="market-grid"></div>
+</div>
+
+<div id="item-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+            <img id="modal-img" src="" alt="Фото">
+            <h2 id="modal-title">Название</h2>
+        </div>
+        <div class="modal-body">
+            <p id="modal-desc" class="item-description"></p> <h3>ОПИСАНИЕ:</h3>
+            <ul id="modal-tth" class="tth-list"></ul>
+            
+            <h3 style="margin-top: 20px; color: var(--cyan);">Официальные поставщики:</h3>
+            <div id="modal-sellers" class="sellers-container"></div> </div>
+        <div class="modal-footer">
+            <span class="license-label">Рыночная стоимость:</span>
+            <span id="modal-price" class="license-price">0 кр.</span>
+        </div>
+    </div>
+</div>
+
+<script src="exchange.js"></script>
+</body>
+</html>

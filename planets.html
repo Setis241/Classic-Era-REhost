@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планетология | Классическая Эра</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">КЛАССИЧЕСКАЯ ЭРА</div>
+        <nav class="main-nav">
+            <a href="index.html">Главная</a>
+            <a href="mechanics.html">⚙️ Механики</a>
+            <a href="pantheon.html">🗽 Пантеон ветеранов</a>
+            <a href="constructors_hub.html">🚀 Конструкторы</a>
+            <a href="faq.html">📡 FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Реестр Миров</h3>
+            <ul>
+                <li><a href="mechanics.html">← Назад</a></li>
+                <li><a href="expansion.html">Колонизация</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1 class="gold-title" style="text-align: center;">ПЛАНЕТОЛОГИЯ</h1>
+            <p style="text-align: center; color: #8892b0; margin-bottom: 40px;">Классификация небесных тел, доступных для освоения в колониальной зоне.</p>
+
+            <div class="planets-grid">
+                
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Terra.png" alt="Терра">
+                    </div>
+                    <h3 class="planet-title">Терра</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 10 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Терра — континентальная планета с умеренным климатом, богатыми экосистемами и стабильной атмосферой. Терра идеально подходит для колонизации, сельского хозяйства и заселения.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Litara.png" alt="Литара">
+                    </div>
+                    <h3 class="planet-title">Литара</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 6 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Скалистая и безжизненная, с грубыми равнинами и острыми хребтами. Её тонкая атмосфера не пригодна для дыхания. Однако богатые залежи титана и редкоземельных элементов делают её ценной для добычи.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Gelward.png" alt="Гельвард">
+                    </div>
+                    <h3 class="planet-title">Гельвард</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 4 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Замёрзший мир, окутанный вечной метелью. Его поверхность состоит из километровых ледяных пластов, под которыми скрыты древние океаны. Температура ниже −180°C. Исследователи считают, что подо льдом возможна микробиологическая жизнь.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Turmion.png" alt="Турмион">
+                    </div>
+                    <h3 class="planet-title">Турмион</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 0 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Массивный газовый гигант с бесконечными ураганами и бурлящими слоями атмосферы. Внутреннее ядро остаётся загадкой. Магнитное поле простирается на десятки тысяч километров.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Psamora.png" alt="Псамора">
+                    </div>
+                    <h3 class="planet-title">Псамора</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 8 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Бескрайние океаны и прибрежные архипелаги. Планета служит туристическим и исследовательским центром. Богатая морская фауна и мягкий климат делают её жемчужиной колониальной зоны.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Duchless.png" alt="Духлесс">
+                    </div>
+                    <h3 class="planet-title">Духлесс</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 4 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Мёртвый мир, отравленный ядовитыми спорами и бактериологическими аномалиями. Центр биологических исследований, строго изолированный. Любая ошибка может обернуться катастрофой.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/Terrakron.png" alt="Теракрон">
+                    </div>
+                    <h3 class="planet-title">Теракрон</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 4 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Пылающая планета, покрытая лавовыми морями и вулканами. Атмосфера насыщена серой и пеплом. Богата редкими минералами, ценными для промышленной и энергетической переработки.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/dastoria.png" alt="Дастория">
+                    </div>
+                    <h3 class="planet-title">Дастория</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 4 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Дюнная планета бескрайней пустыни. Превратилась в пустыню из-за малых запасов воды или климатических изменений. Планета богата лишь водами под землей, если их найдете.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/asteroid.png" alt="Астероид">
+                    </div>
+                    <h3 class="planet-title">Астероид</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 2 (П) + 1 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Крупный астероид, дрейфующий в космическом пространстве системы. Имеет внутри спрятанные ресурсы, которые можно добывать.
+                    </div>
+                </div>
+
+                <div class="planet-block" onclick="openPlanetModal(this)">
+                    <div class="planet-sphere">
+                        <img src="img/death_planet.png" alt="Мертвая планета">
+                    </div>
+                    <h3 class="planet-title">Мёртвая планета</h3>
+                    <div class="planet-stats">
+                        <p class="planet-stats-preview"><span>Ячейки:</span> 1 (П) + 4 (К)</p>
+                    </div>
+                    <div class="p-desc-hidden" style="display:none;">
+                        Невозможно колонизировать, или не имеет смысла, ведь данная планета была уничтожена, а ее атмосфера либо отсутствует, либо настолько токсичная, что непригодна для жизни в любом случае. 
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="planet-modal" class="modal-overlay" onclick="closePlanetModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closePlanetModal()">×</span>
+            <img id="pm-img" src="" style="width:100%; height:250px; object-fit:cover; border-radius:4px; border:1px solid var(--gold-accent);">
+            <h2 id="pm-name" class="gold-title" style="border:none; margin:15px 0 5px 0;">Имя Планеты</h2>
+            
+            <div class="p-modal-stats">
+                <div class="stat-item">
+                    <span id="pm-cells-p" class="stat-value">0</span>
+                    <span class="stat-label">Ячейки (Планета)</span>
+                </div>
+                <div class="stat-item">
+                    <span id="pm-cells-k" class="stat-value">4</span> 
+                    <span class="stat-label">Ячейки (Космос)</span>
+                </div>
+            </div>
+
+            <div id="pm-desc" class="desc-text" style="text-align: left; line-height: 1.6;">Описание</div>
+        </div>
+    </div>
+
+    <script>
+        function openPlanetModal(card) {
+            const name = card.querySelector('h3').innerText;
+            const img = card.querySelector('img').src;
+            const statsText = card.querySelector('.planet-stats-preview').innerText;
+            const desc = card.querySelector('.p-desc-hidden').innerHTML;
+
+            // Извлекаем цифру ячеек планеты из строки "Ячейки: 10 (П)..."
+            // Ищем первую цифру в строке
+            const matchResult = statsText.match(/\d+/);
+            const pCells = matchResult ? matchResult[0] : "0";
+
+            document.getElementById('pm-img').src = img;
+            document.getElementById('pm-name').innerText = name;
+            document.getElementById('pm-cells-p').innerText = pCells;
+            document.getElementById('pm-desc').innerHTML = desc;
+
+            document.getElementById('planet-modal').style.display = 'flex';
+        }
+
+        function closePlanetModal() {
+            document.getElementById('planet-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
