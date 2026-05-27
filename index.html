@@ -4,43 +4,679 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Архивы | Классическая Эра</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="mobile.js" defer></script>
+
     <style>
-        .hero-section {
-            /* Затемнение и сама картинка */
-            background: 
-                linear-gradient(rgba(5, 8, 16, 0.6), rgba(5, 8, 16, 0.9)), 
-                url('img/background_index.png'); 
-            
-            background-size: cover;
-            background-position: center;
-            
-            /* Делаем из этого красивый баннер */
-            border-radius: 12px;
-            padding: 60px 40px;
-            border: 1px solid rgba(0, 229, 255, 0.15); /* Легкая неоновая рамка */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Тень для объема */
-            
-            /* Центрируем всё внутри (если вдруг съедет) */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        /* =========================================================
+           HOME — современный sci-fi dashboard (scope: index.html)
+           Производительность: без backdrop-filter, без filter: blur,
+           без бесконечных background-position анимаций.
+           ========================================================= */
+
+        :root {
+            --hero-cyan: #00e5ff;
+            --hero-gold: #ffcc00;
+            --hero-violet: #8b5cf6;
+            --hero-green: #4ade80;
+            --hero-red:   #ff5577;
+            --panel:       #0e1830;
+            --panel-2:     #0a1224;
+            --line:        rgba(0, 229, 255, 0.16);
+            --line-soft:   rgba(255, 255, 255, 0.06);
+            --text-muted:  #8895b3;
         }
 
-        /* Центрируем сам терминал внутри баннера */
-        .terminal-text {
-            max-width: 600px;
-            width: 100%;
-            text-align: left; /* Текст внутри терминала оставляем по левому краю */
+        /* Плоский тёмный фон + одна статичная «туманность» (без анимации) */
+        body {
+            background:
+                radial-gradient(900px 500px at 85% -10%, rgba(0, 229, 255, 0.06), transparent 60%),
+                radial-gradient(700px 400px at 0% 20%, rgba(139, 92, 246, 0.05), transparent 60%),
+                var(--bg-color);
+            background-attachment: fixed;
+        }
+
+        /* ---- Главный wrapper: широкая раскладка ---- */
+        .wrapper.home {
+            display: block;
+            grid-template-columns: 1fr;
+            max-width: 1720px;
+            margin: 0 auto;
+            padding: 24px clamp(20px, 3vw, 56px);
+            box-sizing: border-box;
+        }
+        .content.home {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* ---- Двухколоночная раскладка на широких экранах ----
+           На десктопе ставим HERO и быстрый доступ + сводки рядом,
+           чтобы не было километра пустоты под hero. */
+        @media (min-width: 1200px) {
+            .home-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+                gap: 24px;
+                align-items: start;
+            }
+            .home-layout .hero { margin: 0; }
+            .home-layout .side-stack {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+            }
+            .home-layout .side-stack .panel-glass {
+                padding: 20px 22px;
+            }
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+        .hero {
+            position: relative;
+            border-radius: 16px;
+            padding: 72px 48px 56px;
+            overflow: hidden;
+            background:
+                linear-gradient(115deg,
+                    rgba(5, 9, 20, 0.72) 0%,
+                    rgba(8, 14, 30, 0.55) 45%,
+                    rgba(8, 14, 30, 0.35) 100%),
+                url('img/background_index.png') center/cover no-repeat;
+            border: 1px solid var(--line);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Тонкая сетка/HUD-линии — статичная SVG, копеечная отрисовка */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at 70% 30%, #000 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 30%, transparent 75%);
+        }
+
+        /* Статичный неоновый блик (без filter:blur, без анимации) */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -160px; right: -160px;
+            width: 460px; height: 460px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.18) 0%, rgba(0, 229, 255, 0.06) 35%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero > * { position: relative; z-index: 1; }
+
+        /* Бейдж "LIVE" */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            background: rgba(74, 222, 128, 0.08);
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 11px;
+            color: var(--hero-green);
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+        }
+        .live-dot {
+            width: 8px; height: 8px;
+            background: var(--hero-green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--hero-green);
+            animation: live-pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: .5; transform: scale(1.3); }
+        }
+
+        .hero h1 {
+            margin: 0 0 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(22px, 4.2vw, 52px);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #fff 0%, var(--hero-gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 204, 0, 0.2);
+        }
+        .hero h1 small {
+            display: block;
+            font-size: 0.32em;
+            color: var(--hero-cyan);
+            -webkit-text-fill-color: var(--hero-cyan);
+            letter-spacing: 8px;
+            margin-top: 14px;
+            font-weight: 400;
+        }
+
+        .hero-lede {
+            max-width: 620px;
+            font-size: 17px;
+            line-height: 1.65;
+            color: #b6c0d4;
+            margin: 0 0 32px;
+        }
+
+        .hero-terminal {
+            display: inline-block;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.45);
+            border-left: 2px solid var(--hero-green);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 12.5px;
+            line-height: 1.9;
+            color: var(--hero-green);
+            margin-bottom: 32px;
+        }
+        .hero-terminal .ok { color: var(--hero-gold); }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: transform .25s, box-shadow .25s, background .25s;
+            cursor: pointer;
+        }
+        .cta-primary {
+            background: linear-gradient(135deg, var(--hero-gold) 0%, #ff9d00 100%);
+            color: #0a0e1a;
+            box-shadow: 0 8px 24px rgba(255, 204, 0, 0.35);
+        }
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(255, 204, 0, 0.5);
+        }
+        .cta-ghost {
+            background: rgba(0, 229, 255, 0.06);
+            color: var(--hero-cyan);
+            border: 1px solid rgba(0, 229, 255, 0.4);
+        }
+        .cta-ghost:hover {
+            background: rgba(0, 229, 255, 0.14);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+        }
+        .cta .arrow { transition: transform .25s; }
+        .cta:hover .arrow { transform: translateX(4px); }
+
+        /* =========================================================
+           SECTION TITLE
+           ========================================================= */
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 18px;
+            gap: 16px;
+        }
+        .section-head h2 {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-head h2::before {
+            content: '';
+            width: 4px; height: 22px;
+            background: linear-gradient(180deg, var(--hero-gold), var(--hero-cyan));
+            border-radius: 2px;
+        }
+        .section-head .crumb {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #6c7a99;
+            letter-spacing: 1.5px;
+        }
+
+        /* =========================================================
+           SECTIONS GRID — киберпанк-HUD карточки
+           ========================================================= */
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0 0 48px;
+        }
+        @media (max-width: 1280px) {
+            .sections-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (max-width: 980px) {
+            .sections-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        .sec-card {
+            --accent: var(--hero-cyan);
+            --accent-rgb: 0, 229, 255;
+            --bw: 1.5px;
+            --bc: rgba(var(--accent-rgb), 0.55);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 26px 20px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            overflow: hidden;
+            transition: border-color .25s, box-shadow .25s, transform .25s;
+            min-height: 180px;
+            background:
+                radial-gradient(circle at 100% 0%, rgba(var(--accent-rgb), 0.10) 0%, transparent 55%),
+                linear-gradient(180deg, #0d1830 0%, #060c1c 100%);
+            border: var(--bw) solid var(--bc);
+        }
+
+        /* HUD-сетка как декор фона */
+        .sec-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: linear-gradient(to bottom right, #000 30%, transparent 80%);
+            -webkit-mask-image: linear-gradient(to bottom right, #000 30%, transparent 80%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* «Сигнальная» цветная полоса вдоль верхней грани */
+        .sec-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 55%; height: 3px;
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sec-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.5),
+                0 0 22px rgba(var(--accent-rgb), 0.25),
+                inset 0 0 30px rgba(var(--accent-rgb), 0.06);
+        }
+
+        /* Цветовые варианты */
+        .sec-gold   { --accent: var(--hero-gold);   --accent-rgb: 255, 204, 0; }
+        .sec-violet { --accent: var(--hero-violet); --accent-rgb: 139, 92, 246; }
+        .sec-green  { --accent: var(--hero-green);  --accent-rgb: 74, 222, 128; }
+        .sec-red    { --accent: #ff5577;            --accent-rgb: 255, 85, 119; }
+
+        /* ID-ярлык как угловой HUD-tag (диагональный срез слева) */
+        .sec-id {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px 14px 5px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 1.5px;
+            color: #0a0e1a;
+            font-weight: 700;
+            background: var(--accent);
+            box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.5);
+            clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+            z-index: 3;
+        }
+
+        /* Иконка как «терминал»: шестиугольник через clip-path */
+        .sec-ico {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px; height: 52px;
+            font-size: 22px;
+            color: var(--accent);
+            background:
+                linear-gradient(135deg, rgba(var(--accent-rgb), 0.18) 0%, rgba(var(--accent-rgb), 0.04) 100%);
+            border: 1px solid rgba(var(--accent-rgb), 0.4);
+            clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+            margin: 4px 0 14px;
+            filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.25));
+            z-index: 1;
+        }
+
+        .sec-card h3 {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .sec-card p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: #8895b3;
+            flex: 1;
+        }
+
+        /* Нижняя строка: «ENTER» с угловой скобкой */
+        .sec-arrow {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(var(--accent-rgb), 0.25);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: rgba(var(--accent-rgb), 0.85);
+            text-transform: uppercase;
+        }
+        .sec-arrow::before { content: 'ACCESS'; }
+        .sec-arrow::after {
+            content: '▶';
+            font-size: 11px;
+            transition: transform .25s;
+        }
+        .sec-card:hover .sec-arrow::after { transform: translateX(4px); }
+
+        /* =========================================================
+           FEED PANEL — сводки
+           ========================================================= */
+        .panel-glass {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 22px 24px;
+        }
+        .feed-panel { margin-bottom: 32px; }
+
+        /* =========================================================
+           STATUS BAR — мелкие цифры внизу
+           ========================================================= */
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            background: rgba(11, 19, 37, 0.5);
+            border: 1px solid var(--line-soft);
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11.5px;
+        }
+        .status-item {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .status-item .sb-label {
+            color: #6c7a99;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        .status-item .sb-val {
+            color: #c8d1e3;
+            font-weight: 600;
+        }
+        .status-item .sb-val.sync { color: var(--hero-green); }
+        .status-sep { color: #2a3550; }
+
+        .feed-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .feed-list li {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .feed-list li:last-child { border-bottom: none; }
+        .feed-list li:first-child { padding-top: 4px; }
+
+        .feed-chip {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-top: 2px;
+        }
+        .chip-tech  { background: rgba(0, 229, 255, 0.12);  color: var(--hero-cyan); }
+        .chip-rules { background: rgba(255, 204, 0, 0.12);  color: var(--hero-gold); }
+        .chip-tool  { background: rgba(139, 92, 246, 0.14); color: var(--hero-violet); }
+        .chip-event { background: rgba(74, 222, 128, 0.12); color: var(--hero-green); }
+
+        .feed-body { font-size: 14.5px; line-height: 1.55; color: #c8d1e3; }
+        .feed-date {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #6c7a99;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================================
+           MOBILE — нативная мобильная вёрстка (full-bleed)
+           ========================================================= */
+        @media (max-width: 900px) {
+            body { background-attachment: scroll; margin: 0 !important; padding: 0 !important; }
+
+            /* Wrapper тянется от края до края — без боковых отступов */
+            .wrapper.home {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                gap: 0 !important;
+            }
+            .content.home {
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+                border: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            /* HERO — full-bleed, без рамки/радиуса по бокам */
+            .hero {
+                padding: 24px 16px 22px !important;
+                border-radius: 0 !important;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-top: 0 !important;
+                margin: 0 0 16px !important;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .hero::before { background-size: 36px 36px; }
+            .hero::after  { width: 220px; height: 220px; top: -90px; right: -90px; }
+
+            .live-badge {
+                font-size: 9px;
+                padding: 5px 10px;
+                letter-spacing: 1.5px;
+                margin-bottom: 14px;
+            }
+
+            /* Заголовок: нормальный word-wrap, без разрыва слов */
+            .hero h1 {
+                font-size: 24px;
+                letter-spacing: 0;
+                line-height: 1.15;
+                margin: 0 0 12px;
+                word-break: normal;
+                overflow-wrap: normal;
+                hyphens: none;
+            }
+            .hero h1 small {
+                font-size: 10px;
+                letter-spacing: 2px;
+                margin-top: 8px;
+            }
+            .hero-lede {
+                font-size: 14px;
+                line-height: 1.55;
+                margin: 0 0 18px;
+            }
+            .hero-terminal {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 10.5px;
+                padding: 10px 12px;
+                line-height: 1.7;
+                margin: 0 0 18px;
+                overflow-x: auto;
+                white-space: normal;
+            }
+            .hero-cta { gap: 8px; flex-direction: column; }
+            .hero-cta .cta {
+                width: 100%;
+                justify-content: space-between;
+                padding: 14px 16px;
+                font-size: 12px;
+                letter-spacing: 1px;
+                box-sizing: border-box;
+            }
+
+            /* Заголовки секций — внутри 14px отступа */
+            .section-head {
+                flex-wrap: wrap;
+                gap: 6px;
+                margin: 0 14px 12px !important;
+            }
+            .section-head h2 { font-size: 14px; letter-spacing: 1px; }
+            .section-head h2::before { height: 18px; }
+            .section-head .crumb { font-size: 9.5px; }
+
+            /* SECTIONS GRID — 2 колонки на мобильном, компактные карточки */
+            .sections-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 10px !important;
+                margin: 0 14px 28px !important;
+            }
+            .sec-card {
+                padding: 16px 14px 14px;
+                min-height: 130px;
+                border-radius: 12px;
+            }
+            .sec-card::after { width: 100px; height: 100px; top: -30px; right: -30px; }
+            .sec-ico {
+                width: 38px; height: 38px;
+                font-size: 19px;
+                margin-bottom: 10px;
+                border-radius: 9px;
+            }
+            .sec-card h3 { font-size: 14px; letter-spacing: 0.3px; }
+            .sec-card p { font-size: 12px; line-height: 1.35; }
+            .sec-arrow { font-size: 16px; margin-top: 10px; }
+
+            /* FEED PANEL — full-bleed */
+            .feed-panel.panel-glass {
+                padding: 16px 14px !important;
+                border-radius: 0 !important;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                margin-bottom: 24px;
+            }
+            .feed-list li {
+                grid-template-columns: auto 1fr;
+                gap: 10px;
+                padding: 12px 0;
+            }
+            .feed-body { font-size: 13.5px; line-height: 1.45; }
+            .feed-chip { font-size: 9px; padding: 3px 7px; }
+            .feed-date { font-size: 10.5px; }
+
+            /* STATUS BAR — мелкая полоска снизу */
+            .status-bar {
+                margin: 0 14px 16px;
+                padding: 10px 14px;
+                gap: 8px 12px;
+                font-size: 10.5px;
+                border-radius: 100px;
+            }
+            .status-item .sb-label { font-size: 9px; letter-spacing: 1px; }
+            .status-sep { display: none; }
+        }
+        @media (max-width: 360px) {
+            .hero { padding: 22px 14px 20px !important; }
+            .hero h1 { font-size: 21px; }
+            .hero h1 small { font-size: 9px; letter-spacing: 1.5px; }
+            .hero-lede { font-size: 13.5px; }
+            .sections-grid { gap: 8px !important; margin: 0 10px 22px !important; }
+            .sec-card { padding: 14px 12px 12px; min-height: 120px; }
+            .sec-card h3 { font-size: 13px; }
+            .sec-card p { font-size: 11.5px; }
+            .status-bar { margin: 0 10px 14px; padding: 8px 12px; }
         }
     </style>
-</head>
 </head>
 <body>
 
@@ -55,72 +691,157 @@
         </nav>
     </header>
 
-    <div class="wrapper">
-        <aside class="sidebar">
-            <h3>Быстрые ссылки</h3>
-            <ul>
-                <li><a href="lore.html">История Мира</a></li>
-                <li><a href="#">Сводка об Государствах</a></li>
-                <li><a href="map.html">Карта Галактики</a></li>
-                <li><a href="exchange.html">Региональная Биржа</a></li>
-            </ul>
-        </aside>
+    <div class="wrapper home">
+        <main class="content home">
 
-        <main class="content">
-            
-            <section class="hero-section">
-                <h1 class="hero-title">Архивы Классической Эры</h1>
-                
-                <div class="terminal-text">
-                    > Установка соединения с центральным узлом...<br>
-                    > Проверка уровня допуска... [ОДОБРЕНО]<br>
-                    > Синхронизация данных флота... 100%<br>
-                    > Доступ к военно-политическому реестру открыт.
+            <!-- HERO -->
+            <section class="hero">
+                <span class="live-badge">
+                    <span class="live-dot"></span>
+                    SYS//ONLINE · 3045.02.23
+                </span>
+
+                <h1>
+                    Архивы Классической Эры
+                    <small>// военно-политический реестр</small>
+                </h1>
+
+                <p class="hero-lede">
+                    Единая точка доступа к данным флота, фракций и сектора. Технический реестр,
+                    конструкторы, история и оперативные сводки — синхронизированы в реальном времени.
+                </p>
+
+                <div class="hero-terminal">
+                    &gt; Установка соединения с центральным узлом... <span class="ok">[OK]</span><br>
+                    &gt; Проверка уровня допуска... <span class="ok">[ОДОБРЕНО]</span><br>
+                    &gt; Синхронизация данных флота... <span class="ok">100%</span><br>
+                    &gt; Доступ к реестру открыт.
                 </div>
 
-                <div class="hero-buttons">
-                    <a href="guide.html" class="btn-primary">Открыть Справочник</a>
-                    <a href="constructor.html" class="btn-outline">Перейти в Верфь</a>
+                <div class="hero-cta">
+                    <a href="guide.html" class="cta cta-primary">
+                        Открыть Справочник <span class="arrow">→</span>
+                    </a>
+                    <a href="constructor.html" class="cta cta-ghost">
+                        Перейти в Верфь <span class="arrow">→</span>
+                    </a>
                 </div>
             </section>
 
-            <section class="quick-access">
-                <a href="factions.html" class="access-card">
-                    <span class="card-icon">♜</span>
+            <!-- РАЗДЕЛЫ — главная сетка навигации (8 карточек) -->
+            <div class="section-head">
+                <h2>Разделы архива</h2>
+                <span class="crumb">// 08 модулей</span>
+            </div>
+            <section class="sections-grid">
+                <a href="lore.html" class="sec-card sec-gold">
+                    <span class="sec-id">SEC.001 // LORE</span>
+                    <span class="sec-ico">⌬</span>
+                    <h3>История Мира</h3>
+                    <p>Хронология событий и предыстория Классической Эры</p>
+                    <span class="sec-arrow"></span>
+                </a>
+                <a href="mechanics.html" class="sec-card sec-violet">
+                    <span class="sec-id">SEC.002 // RULES</span>
+                    <span class="sec-ico">⚙</span>
+                    <h3>Механики</h3>
+                    <p>Игровые правила, бой, экономика и системы</p>
+                    <span class="sec-arrow"></span>
+                </a>
+                <a href="factions.html" class="sec-card sec-red">
+                    <span class="sec-id">SEC.003 // POL</span>
+                    <span class="sec-ico">♜</span>
                     <h3>Фракции</h3>
-                    <p>Политическая расстановка сил, союзы и действующие государства Классической Эры.</p>
+                    <p>Государства, союзы и политическая расстановка</p>
+                    <span class="sec-arrow"></span>
                 </a>
-                
-                <a href="guide.html" class="access-card">
-                    <span class="card-icon">⚔</span>
+                <a href="guide.html" class="sec-card">
+                    <span class="sec-id">SEC.004 // TECH</span>
+                    <span class="sec-ico">⚔</span>
                     <h3>Вооружение</h3>
-                    <p>Полный технический реестр: от легкой баллистики до артиллерийских дредноутов.</p>
+                    <p>Технический реестр кораблей, оружия и систем</p>
+                    <span class="sec-arrow"></span>
                 </a>
-
-                <a href="pantheon.html" class="access-card">
-                    <span class="card-icon">♚</span>
+                <a href="pantheon.html" class="sec-card sec-violet">
+                    <span class="sec-id">SEC.005 // HEROES</span>
+                    <span class="sec-ico">♛</span>
                     <h3>Пантеон</h3>
-                    <p>Зал Славы. Легендарные адмиралы, политики и герои прошлых конфликтов.</p>
+                    <p>Зал Славы. Легендарные адмиралы и герои</p>
+                    <span class="sec-arrow"></span>
+                </a>
+                <a href="constructors_hub.html" class="sec-card">
+                    <span class="sec-id">SEC.006 // ENG</span>
+                    <span class="sec-ico">⬢</span>
+                    <h3>Конструкторы</h3>
+                    <p>Верфь, авиация, дивизии, цивилизации</p>
+                    <span class="sec-arrow"></span>
+                </a>
+                <a href="map.html" class="sec-card sec-green">
+                    <span class="sec-id">SEC.007 // NAV</span>
+                    <span class="sec-ico">◉</span>
+                    <h3>Карта Галактики</h3>
+                    <p>Интерактивная карта секторов и систем</p>
+                    <span class="sec-arrow"></span>
+                </a>
+                <a href="exchange.html" class="sec-card sec-gold">
+                    <span class="sec-id">SEC.008 // ECON</span>
+                    <span class="sec-ico">◈</span>
+                    <h3>Биржа</h3>
+                    <p>Региональная торговля, ресурсы и контракты</p>
+                    <span class="sec-arrow"></span>
                 </a>
             </section>
 
-            <section class="updates-feed">
-                <h2 class="gold-title" style="font-size: 18px; margin-bottom: 15px;">Последние сводки разведки</h2>
-                <ul class="updates-list">
+            <!-- СВОДКИ -->
+            <div class="section-head">
+                <h2>Сводки разведки</h2>
+                <span class="crumb">// last 30d</span>
+            </div>
+            <section class="panel-glass feed-panel">
+                <ul class="feed-list">
                     <li>
-                        <span class="update-date">[23.02.3045]</span>
-                        <span class="update-text">Обновлен технический реестр. Добавлены спецификации тяжелого линейного корабля.</span>
+                        <span class="feed-chip chip-tech">TECH</span>
+                        <div>
+                            <div class="feed-body">Обновлён технический реестр. Добавлены спецификации тяжёлого линейного корабля.</div>
+                            <span class="feed-date">23.02.3045</span>
+                        </div>
                     </li>
                     <li>
-                        <span class="update-date">[19.02.3045]</span>
-                        <span class="update-text">Внесены изменения в систему бронирования: добавлены данные о сплаве Умгат.</span>
+                        <span class="feed-chip chip-rules">RULES</span>
+                        <div>
+                            <div class="feed-body">Внесены изменения в систему бронирования: добавлены данные о сплаве Умгат.</div>
+                            <span class="feed-date">19.02.3045</span>
+                        </div>
                     </li>
                     <li>
-                        <span class="update-date">[12.02.3045]</span>
-                        <span class="update-text">Открыт доступ к Инженерному терминалу верфи (Версия ПО: Project Shipyard 1.9.1).</span>
+                        <span class="feed-chip chip-tool">TOOL</span>
+                        <div>
+                            <div class="feed-body">Открыт доступ к Инженерному терминалу верфи (ПО: Project Shipyard 1.9.1).</div>
+                            <span class="feed-date">12.02.3045</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="feed-chip chip-event">EVENT</span>
+                        <div>
+                            <div class="feed-body">Картография галактики: открыто 4 новых сектора в Внешнем Кольце.</div>
+                            <span class="feed-date">05.02.3045</span>
+                        </div>
                     </li>
                 </ul>
             </section>
+
+            <!-- ФУТЕР-СТАТУС: цифры теперь как ambient system info, мелко и в конце -->
+            <footer class="status-bar">
+                <div class="status-item"><span class="sb-label">Фракции</span><span class="sb-val">12</span></div>
+                <span class="status-sep">·</span>
+                <div class="status-item"><span class="sb-label">Системы</span><span class="sb-val">87</span></div>
+                <span class="status-sep">·</span>
+                <div class="status-item"><span class="sb-label">Корабли</span><span class="sb-val">240+</span></div>
+                <span class="status-sep">·</span>
+                <div class="status-item"><span class="sb-label">Ветераны</span><span class="sb-val">36</span></div>
+                <span class="status-sep">·</span>
+                <div class="status-item"><span class="sb-label">Sync</span><span class="sb-val sync">● live</span></div>
+            </footer>
 
         </main>
     </div>

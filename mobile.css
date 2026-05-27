@@ -1,0 +1,323 @@
+/* =========================================================
+   MOBILE.CSS — единая мобильная адаптация (≤ 900px)
+   Подключать ПОСЛЕ style.css.
+   ========================================================= */
+
+/* Бургер по умолчанию скрыт (десктоп) */
+.mobile-burger { display: none; }
+
+/* Брейкпоинт: телефоны и узкие планшеты */
+@media (max-width: 900px) {
+
+    /* ---- 0. ГЛОБАЛЬНЫЕ ПРЕДОХРАНИТЕЛИ ---- */
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    body { font-size: 16px; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+
+    /* Не даём широким блокам ломать вёрстку */
+    .panel, .content, .sidebar,
+    .mechanics-card, .veteran-card, .access-card,
+    .faction-card, .planet-card, .event-card,
+    .build-card, .market-card, .v-card {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ---- 1. ШАПКА + БУРГЕР ---- */
+    .top-header,
+    header.top-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 14px;
+        gap: 10px;
+    }
+    .logo {
+        font-size: 16px !important;
+        letter-spacing: 1px;
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+        animation: none !important; /* убираем «левитацию» на мобильном */
+    }
+
+    /* Кнопка-бургер */
+    .mobile-burger {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        border: 1px solid rgba(0, 229, 255, 0.4);
+        background: rgba(5, 9, 20, 0.6);
+        border-radius: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .mobile-burger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--neon-blue, #00e5ff);
+        box-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
+        transition: transform .25s, opacity .25s;
+    }
+    body.nav-open .mobile-burger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    body.nav-open .mobile-burger span:nth-child(2) { opacity: 0; }
+    body.nav-open .mobile-burger span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Затемнение фона */
+    .mobile-nav-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .25s;
+    }
+    body.nav-open .mobile-nav-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+    body.nav-open { overflow: hidden; }
+
+    /* ---- 2. ВЫЕЗЖАЮЩЕЕ МЕНЮ ---- */
+    .main-nav,
+    header .nav,
+    .top-header .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        height: 100dvh;
+        width: min(82vw, 320px);
+        background: #0b1325;
+        border-left: 2px solid var(--neon-blue, #00e5ff);
+        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+        padding: 70px 18px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 0;
+        transform: translateX(100%);
+        transition: transform .28s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+    body.nav-open .main-nav,
+    body.nav-open header .nav {
+        transform: translateX(0);
+    }
+    .main-nav a,
+    header .nav a {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 14px 12px;
+        font-size: 15px;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+        color: var(--text-main, #d1d5db);
+        text-decoration: none;
+    }
+    .main-nav a:last-child { border-bottom: 0; }
+
+    /* ---- 3. ОСНОВНАЯ СЕТКА ---- */
+    .wrapper {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+        padding: 12px;
+        gap: 14px;
+    }
+    .sidebar {
+        width: 100%;
+        margin-bottom: 14px;
+        padding: 14px;
+    }
+    .sidebar h3 { font-size: 15px; margin-bottom: 8px; }
+    .sidebar li { margin-bottom: 10px; }
+    .sidebar a { display: block; padding: 6px 0; }
+
+    .content {
+        padding: 16px 14px;
+        border-radius: 6px;
+    }
+
+    /* ---- 4. КОНСТРУКТОР ---- */
+    .builder-grid {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+    .config-col, .stats-col { width: 100%; }
+    .panel {
+        padding: 14px 12px;
+        margin-bottom: 14px;
+    }
+    .panel h2 { font-size: 14px; }
+
+    /* Инлайновые grid-сетки внутри панелей (1fr 1fr, 1fr 1fr 1fr и т.д.) */
+    [style*="grid-template-columns"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    /* Но stats-row в карточке корабля оставляем сеткой авто */
+    .stats-row[style*="grid-template-columns"] {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Поля ввода */
+    input, select, textarea, button {
+        font-size: 16px; /* iOS не зумит при фокусе */
+        min-height: 44px;
+        box-sizing: border-box;
+    }
+    .qty-input { width: 70px; min-height: 40px; }
+    .btn,
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+        white-space: normal;
+        padding: 14px 16px;
+        min-height: 48px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* ---- 5. ГЛАВНАЯ — HERO + КАРТОЧКИ ---- */
+    .hero-section {
+        padding: 30px 18px !important;
+    }
+    .hero-title { font-size: 24px; line-height: 1.2; }
+    .terminal-text { font-size: 13px; }
+
+    .quick-access,
+    .build-grid,
+    .market-grid,
+    .planet-grid,
+    .planets-grid,
+    .factions-grid,
+    .events-grid,
+    .mechanics-grid,
+    .guide-grid,
+    .pantheon-category,
+    .victory-list,
+    .main-stats-grid,
+    .tech-branch {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .access-card,
+    .mechanics-card,
+    .build-card,
+    .market-card,
+    .planet-card,
+    .planet-block,
+    .faction-card,
+    .event-card,
+    .v-card {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* ---- 6. ТИПОГРАФИКА ---- */
+    h1, .hero-title, .gold-title { font-size: 22px; line-height: 1.25; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p  { font-size: 15px; line-height: 1.55; }
+
+    /* ---- 7. МОДАЛКИ ---- */
+    .modal-box,
+    .modal-content {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        max-height: 90vh !important;
+        margin: 5vh auto !important;
+        overflow-y: auto;
+    }
+    .modal-header {
+        height: auto !important;
+        padding: 12px;
+    }
+    .modal-body { padding: 14px !important; }
+
+    /* ---- 8. ВКЛАДКИ БИРЖИ ---- */
+    .exchange-tabs {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .tab-btn {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    /* ---- 9. FAQ ---- */
+    .faq-question { padding: 14px 12px; font-size: 14px; }
+    .faq-answer   { padding: 0 12px 14px; font-size: 14px; }
+
+    /* ---- 10. КАРТА ГАЛАКТИКИ ---- */
+    .map-body { overflow: hidden; }
+    #map-viewport {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        touch-action: none; /* пан/зум обрабатывает map_engine.js */
+    }
+    #system-info-panel {
+        width: 92vw !important;
+        max-width: 92vw !important;
+        max-height: 70vh !important;
+        left: 50% !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: 12px !important;
+        transform: translateX(-50%) !important;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+    #coord-panel {
+        font-size: 11px !important;
+        padding: 4px 8px !important;
+    }
+
+    /* ---- 11. КОНСТРУКТОР: SVG ЧЕРТЁЖ ---- */
+    .blueprint-panel { padding: 10px; }
+    .blueprint-svg   { width: 100%; height: auto; }
+
+    /* ---- 12. ПОДВЕДЕНИЕ ИТОГОВ ---- */
+    .stats-col .panel { position: static !important; }
+
+    /* ---- 13. УТИЛИТЫ ---- */
+    .top-header > * + * { margin-left: 0; }
+    table { display: block; overflow-x: auto; width: 100%; }
+}
+
+/* Узкие телефоны */
+@media (max-width: 380px) {
+    .logo { font-size: 14px !important; letter-spacing: 0.5px; }
+    h1, .hero-title, .gold-title { font-size: 20px; }
+    .hero-section { padding: 24px 14px !important; }
+    .content, .panel { padding: 12px 10px; }
+}
